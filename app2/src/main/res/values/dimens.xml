@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="login_tooltip_side">24dp</dimen>
+
+    <dimen name="dimen_image_hero_medium_width">110dp</dimen>
+    <dimen name="dimen_image_hero_medium_height">60dp</dimen>
+    <dimen name="dimen_grid_space">20dp</dimen>
+
+    <dimen name="dimen_table_hero_width">60dp</dimen>
+    <dimen name="dimen_table_name_width">120dp</dimen>
+    <dimen name="dimen_table_data_width_small">28dp</dimen>
+    <dimen name="dimen_table_data_width_standard">32dp</dimen>
+    <dimen name="dimen_table_data_width_large">48dp</dimen>
+    <dimen name="dimen_item_side_small">28dp</dimen>
+    <dimen name="dimen_table_row_height">40dp</dimen>
+    <dimen name="dimen_chart_height">300dp</dimen>
+</resources>

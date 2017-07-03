@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    style="@style/AppTheme.CardViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="@dimen/margin_8dp"
+    card_view:cardBackgroundColor="@color/md_white_1000"
+    card_view:cardUseCompatPadding="true"
+    card_view:contentPadding="@dimen/padding_8dp">
+
+    <com.michaelfotiadis.dota2viewer.ui.view.calendar.CalendarCard
+        android:id="@+id/calendar_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</android.support.v7.widget.CardView>

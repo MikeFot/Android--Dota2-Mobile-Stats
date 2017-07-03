@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_calendar"
+        android:icon="@drawable/ic_date_range_white_24dp"
+        android:title="Calendar"/>
+
+    <item
+        android:id="@+id/navigation_heroes"
+        android:icon="@drawable/ic_person_white_24dp"
+        android:title="Heroes"/>
+
+</menu>

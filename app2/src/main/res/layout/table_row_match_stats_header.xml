@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/dimen_table_row_height">
+
+
+    <TextView
+        android:id="@+id/text_label_hero"
+        android:layout_width="@dimen/dimen_table_hero_width"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="Hero"/>
+
+    <TextView
+        android:id="@+id/text_label_name"
+        android:layout_width="@dimen/dimen_table_name_width"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="Name"/>
+
+    <TextView
+        android:id="@+id/text_label_level"
+        android:layout_width="@dimen/dimen_table_data_width_small"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="Lvl"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/text_label_kills"
+        android:layout_width="@dimen/dimen_table_data_width_small"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="K"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/text_label_deaths"
+        android:layout_width="@dimen/dimen_table_data_width_small"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="D"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/text_label_assists"
+        android:layout_width="@dimen/dimen_table_data_width_standard"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="A"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/text_label_gold"
+        android:layout_width="@dimen/dimen_table_data_width_large"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="Gold"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/text_label_spent"
+        android:layout_width="@dimen/dimen_table_data_width_large"
+        android:layout_height="match_parent"
+        android:layout_column="7"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="Spent"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/text_label_gpm"
+        android:layout_width="@dimen/dimen_table_data_width_large"
+        android:layout_height="match_parent"
+        android:layout_column="8"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="GpM"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/text_label_xpm"
+        android:layout_width="@dimen/dimen_table_data_width_large"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="XpM"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/text_label_last_hits"
+        android:layout_width="@dimen/dimen_table_data_width_standard"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="LH"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/text_label_denies"
+        android:layout_width="@dimen/dimen_table_data_width_standard"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="DN"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/text_label_hd"
+        android:layout_width="@dimen/dimen_table_data_width_standard"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="HD"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/text_label_hh"
+        android:layout_width="@dimen/dimen_table_data_width_standard"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="HH"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/text_label_td"
+        android:layout_width="@dimen/dimen_table_data_width_standard"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="TD"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/text_label_items"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:padding="2dp"
+        android:text="Items"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+</TableRow>

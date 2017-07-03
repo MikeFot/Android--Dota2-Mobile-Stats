@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primary">@color/md_blue_500</color>
+    <color name="primary_dark">@color/md_blue_700</color>
+    <color name="primary_light">@color/md_blue_100</color>
+    <color name="accent">@color/md_indigo_A200</color>
+    <color name="primary_text">@color/md_grey_900</color>
+    <color name="secondary_text">@color/md_grey_600</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+
+    <color name="bg_drawer">#FFF</color>
+    <color name="bg_window">@color/md_light_blue_50</color>
+    <color name="navigation">#000</color>
+
+    <color name="grey_dark">@color/md_grey_700</color>
+    <color name="grey_medium">@color/md_grey_500</color>
+    <color name="grey_light">@color/md_grey_300</color>
+
+    <color name="error">@color/md_red_600</color>
+
+    <color name="hero_card_int">@color/md_light_blue_500</color>
+    <color name="hero_card_str">@color/md_red_500</color>
+    <color name="hero_card_agi">@color/md_green_500</color>
+
+    <color name="map_green_radiant_light">#62C44F</color>
+    <color name="map_green_radiant_dark">#005200</color>
+    <color name="map_red_dire_light">@color/md_red_800</color>
+    <color name="map_red_dire_dark">#660000</color>
+
+    <color name="bg_light_green">@color/md_green_50</color>
+    <color name="bg_light_red">@color/md_red_50</color>
+
+    <color name="player_won">@color/md_light_green_800</color>
+    <color name="player_lost">@color/md_orange_900</color>
+
+
+</resources>

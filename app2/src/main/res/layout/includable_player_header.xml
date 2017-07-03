@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/header_layout"
+                android:layout_width="match_parent"
+                android:layout_height="80dip">
+
+
+    <ImageView
+        android:id="@+id/image_player_icon"
+        android:layout_width="80dip"
+        android:layout_height="80dip"
+        android:contentDescription="@string/cd_user_avatar"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        tools:src="@drawable/profile_marneus"/>
+
+    <TextView
+        android:id="@+id/text_persona"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/image_player_icon"
+        android:layout_toRightOf="@+id/image_player_icon"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/text_username"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        tools:text="Marneus"/>
+
+
+    <LinearLayout
+        android:id="@+id/layout_country"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/text_persona"
+        android:layout_toEndOf="@+id/image_player_icon"
+        android:layout_toRightOf="@+id/image_player_icon"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/image_player_flag"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/ct_country_flag"
+            android:scaleType="fitCenter"
+            tools:src="@drawable/ic_list_country_gb"/>
+
+        <TextView
+            android:id="@+id/text_country"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dip"
+            android:text="World"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            tools:text="United Kingdom"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/accent"/>
+
+</RelativeLayout>

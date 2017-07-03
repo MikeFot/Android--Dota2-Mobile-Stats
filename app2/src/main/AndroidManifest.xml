@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.michaelfotiadis.dota2viewer">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application
+        android:name=".Dota2Application"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup, android:supportsRtl, android:label">
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="d936fe3caf46a1a4ffc49339b09d733af6a6b6b5"/>
+
+        <activity android:name=".ui.activity.bootstrap.BootstrapActivity">
+        </activity>
+        <activity android:name=".ui.activity.login.LoginActivity">
+        </activity>
+        <activity
+            android:name=".ui.activity.main.MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.performance.PerformanceActivity"
+            android:label="@string/title_activity_performance">
+        </activity>
+        <activity
+            android:name=".ui.activity.details.MatchDetailsActivity"
+            android:parentActivityName=".ui.activity.main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.michaelfotiadis.dota2viewer.ui.activity.main.MainActivity"/>
+        </activity>
+    </application>
+
+</manifest>

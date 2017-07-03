@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/padding_4dp">
+
+    <com.michaelfotiadis.dota2viewer.ui.view.VerticalTextView
+        android:id="@+id/faction_title"
+        style="@style/AppTheme.TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+        android:gravity="center"
+        android:padding="4dip"
+        android:textColor="@color/map_green_radiant_dark"
+        tools:text="Radiant"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            style="@style/AppTheme.CardViewStyle"
+            android:layout_width="match_parent"
+            app:cardBackgroundColor="@color/md_light_blue_50"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/team_title"
+                style="@style/AppTheme.TextView.Info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_dark"
+                android:textSize="@dimen/text_medium_large"
+                tools:text="THE HORSEMEN"/>
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/text_net_worth"
+            style="@style/AppTheme.TextView.Info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Net Worth: 550"/>
+
+        <TextView
+            android:id="@+id/picks"
+            style="@style/AppTheme.TextView.Info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_live_picks"/>
+
+        <include
+            android:id="@+id/faction_picks"
+            layout="@layout/includable_five_hero_horizontal"/>
+
+        <TextView
+            android:id="@+id/bans"
+            style="@style/AppTheme.TextView.Info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_live_bans"/>
+
+        <include
+            android:id="@+id/faction_bans"
+            layout="@layout/includable_five_hero_horizontal"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

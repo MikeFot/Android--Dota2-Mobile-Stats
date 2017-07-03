@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    style="@style/AppTheme.CardViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="@dimen/margin_8dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:contentPadding="@dimen/padding_8dp">
+
+    <LinearLayout
+        android:id="@+id/layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:contentDescription="@string/cont_des_hero_portrait"
+            android:scaleType="fitCenter"/>
+
+        <TextView
+            android:id="@+id/text_name"
+            style="@style/AppTheme.TextView.Info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/text_medium_large"
+            tools:text="Crystal MaidenCrystal MaidenCrystal MaidenCrystal Maiden"/>
+
+        <TextView
+            android:id="@+id/text_id"
+            style="@style/AppTheme.TextView.Info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/text_small"
+            tools:text="(Crystal Maiden)"/>
+
+        <TextView
+            android:id="@+id/text_original"
+            style="@style/AppTheme.TextView.Info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"/>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.TextView" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/text_font_size_default</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="AppTheme.TextView.Info" parent="AppTheme.TextView">
+        <item name="android:paddingBottom">@dimen/text_half_vertical_padding</item>
+        <item name="android:paddingTop">@dimen/text_half_vertical_padding</item>
+        <item name="android:paddingLeft">@dimen/text_horizontal_padding</item>
+        <item name="android:paddingRight">@dimen/text_horizontal_padding</item>
+    </style>
+
+</resources>

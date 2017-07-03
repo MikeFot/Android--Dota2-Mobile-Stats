@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:id="@+id/table_row_alias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_8dp">
+
+            <TextView
+                android:id="@+id/text_label_persona"
+                android:layout_width="wrap_content"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text="@string/text_label_alias"
+                />
+
+            <TextView
+                android:id="@+id/text_content_persona"
+                android:layout_column="2"
+                android:layout_weight="2"
+                tools:text="Marneus"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/table_row_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_8dp">
+
+            <TextView
+                android:id="@+id/text_label_steam_id"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text="@string/text_label_steam_id"
+                />
+
+            <TextView
+                android:id="@+id/text_content_steam_id"
+                android:layout_column="2"
+                android:layout_weight="2"
+                tools:text="76561198005727241"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/table_row_privacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_8dp">
+
+            <TextView
+                android:id="@+id/text_label_privacy"
+                android:layout_width="wrap_content"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text="@string/text_label_privacy_settings"/>
+
+            <TextView
+                android:id="@+id/text_content_privacy"
+                android:layout_column="2"
+                android:layout_weight="2"
+                tools:text="Open"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/table_row_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_8dp">
+
+            <TextView
+                android:id="@+id/text_label_status"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text="@string/text_label_online_status"
+                />
+
+            <TextView
+                android:id="@+id/text_content_status"
+                android:layout_column="2"
+                android:layout_weight="2"
+
+                tools:text="Online"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/table_row_last_online"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_8dp">
+
+            <TextView
+                android:id="@+id/text_label_last_online"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text="@string/text_label_last_online"
+                />
+
+            <TextView
+                android:id="@+id/text_content_last_online"
+                android:layout_column="2"
+                android:layout_weight="2"
+
+                tools:text="23/05/15"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/table_row_library"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_8dp">
+
+            <TextView
+                android:id="@+id/text_label_number_of_games"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text="@string/text_label_library_size"
+                />
+
+            <TextView
+                android:id="@+id/text_content_number_of_games"
+                android:layout_column="2"
+                android:layout_weight="2"
+
+                tools:text="185"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/table_row_dota_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_8dp">
+
+            <TextView
+                android:id="@+id/text_label_dota_2"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text="@string/text_label_dota_2"
+                />
+
+            <TextView
+                android:id="@+id/text_content_hours_on_record"
+                android:layout_column="2"
+                android:layout_weight="2"
+
+                tools:text="250 hours on record"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/table_row_url_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_8dp">
+
+            <TextView
+                android:id="@+id/text_label_url"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text="@string/text_label_personal_url"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/table_row_url_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_8dp">
+
+            <TextView
+                android:id="@+id/text_content_url"
+                android:layout_column="1"
+                android:layout_span="2"
+                android:layout_weight="1"
+                android:textColor="@color/md_blue_700"
+                tools:text="http://steamcommunity.com/id/mfirehell/"/>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    style="@style/AppTheme.CardViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="@dimen/margin_8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="@dimen/padding_8dp"
+    tools:ignore="RtlHardcoded">
+
+    <LinearLayout
+        android:id="@+id/layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/image_hero"
+                android:layout_width="116dp"
+                android:layout_height="140dp"
+                android:contentDescription="@string/cont_des_hero_portrait"
+                tools:src="@drawable/crystal_maiden_vert"/>
+
+            <TextView
+                android:id="@+id/name"
+                style="@style/AppTheme.TextView.Info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/image_hero"
+                tools:text="Crystal Maiden"
+                tools:textColor="@color/hero_card_int"/>
+
+            <ImageView
+                android:id="@+id/image_pip_str"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/attr_strength"
+                android:layout_alignTop="@id/attr_strength"
+                android:layout_below="@id/name"
+                android:layout_marginLeft="@dimen/margin_8dp"
+                android:layout_toRightOf="@id/image_hero"
+                android:contentDescription="@string/cont_desc_attr_type"
+                android:foregroundGravity="right"
+                app:srcCompat="@drawable/ic_list_pip_str"/>
+
+            <TextView
+                android:id="@id/attr_strength"
+                style="@style/AppTheme.TextView.Info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:layout_toRightOf="@id/image_pip_str"
+                tools:text="25 + 5/level (max 255)"/>
+
+            <ImageView
+                android:id="@+id/image_pip_agi"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/attr_agility"
+                android:layout_alignTop="@id/attr_agility"
+                android:layout_below="@id/image_pip_str"
+                android:layout_marginLeft="@dimen/margin_8dp"
+                android:layout_toRightOf="@id/image_hero"
+                android:contentDescription="@string/cont_desc_attr_type"
+                android:foregroundGravity="right"
+                app:srcCompat="@drawable/ic_list_pip_agi"/>
+
+            <TextView
+                android:id="@id/attr_agility"
+                style="@style/AppTheme.TextView.Info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_pip_str"
+                android:layout_toRightOf="@id/image_pip_agi"
+                tools:text="26 + 6/level (max 255)"/>
+
+            <ImageView
+                android:id="@+id/image_pip_int"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/attr_intelligence"
+                android:layout_alignTop="@id/attr_intelligence"
+                android:layout_below="@id/image_pip_agi"
+                android:layout_marginLeft="@dimen/margin_8dp"
+                android:layout_toRightOf="@id/image_hero"
+                android:contentDescription="@string/cont_desc_attr_type"
+                android:foregroundGravity="right"
+                app:srcCompat="@drawable/ic_list_pip_int"/>
+
+            <TextView
+                android:id="@id/attr_intelligence"
+                style="@style/AppTheme.TextView.Info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_pip_agi"
+                android:layout_toRightOf="@id/image_pip_int"
+                tools:text="30 + 6/level (max 255)"
+                tools:textColor="@color/hero_card_int"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/damage_title"
+                style="@style/AppTheme.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Damage:"/>
+
+            <TextView
+                android:id="@+id/damage_content"
+                style="@style/AppTheme.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/text_half_horizontal_padding"
+                android:paddingRight="@dimen/text_half_horizontal_padding"
+                tools:text="25-35"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

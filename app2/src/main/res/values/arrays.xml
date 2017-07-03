@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="string_array_drawer_titles">
+        <item>Match History</item>
+        <item>Hero Cards</item>
+        <item>Game Library</item>
+        <item>Calendar</item>
+    </string-array>
+
+    <array name="chart_colors_two">
+        <item>@color/md_green_400</item>
+        <item>@color/md_red_400</item>
+    </array>
+
+    <array name="chart_colors_three">
+        <item>@color/md_red_300</item>
+        <item>@color/md_blue_300</item>
+        <item>@color/md_green_300</item>
+    </array>
+
+    <array name="chart_colors_ten">
+        <item>@color/md_green_200</item>
+        <item>@color/md_green_300</item>
+        <item>@color/md_green_400</item>
+        <item>@color/md_green_500</item>
+        <item>@color/md_green_600</item>
+        <item>@color/md_red_200</item>
+        <item>@color/md_red_300</item>
+        <item>@color/md_red_400</item>
+        <item>@color/md_red_500</item>
+        <item>@color/md_red_600</item>
+    </array>
+</resources>

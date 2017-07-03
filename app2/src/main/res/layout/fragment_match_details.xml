@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="@dimen/padding_8dp">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:fadeScrollbars="false">
+
+        <LinearLayout
+            android:id="@+id/layout_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_header_victory"
+                style="@style/AppTheme.TextView.Info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold"
+                tools:text="Radiant Victory"
+                tools:textColor="@color/map_green_radiant_light"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fadeScrollbars="false">
+
+                <LinearLayout
+                    android:id="@+id/layout_match_stats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_title_radiant"
+                        style="@style/AppTheme.TextView.Info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="The Radiant"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/map_green_radiant_light"
+                        android:textStyle="bold"/>
+
+                    <include
+                        android:id="@+id/faction_radiant_details"
+                        layout="@layout/table_match_faction_details"/>
+
+                    <TextView
+                        android:id="@+id/text_title_dire"
+                        style="@style/AppTheme.TextView.Info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="The Dire"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/map_red_dire_light"
+                        android:textStyle="bold"/>
+
+                    <include
+                        android:id="@+id/faction_dire_details"
+                        layout="@layout/table_match_faction_details"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

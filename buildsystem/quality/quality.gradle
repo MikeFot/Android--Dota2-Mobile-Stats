@@ -1,0 +1,95 @@
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
+def checkStyleBlowOnError = false
+def findBugsBlowOnError = false
+def lintBlowOnError = false
+def pmdBlowOnError = true
+
+def qualityFolder = "${project.rootDir}/buildsystem/quality/"
+def reportsFolder = "${project.buildDir}/reports/"
+
+def staticAnalysisSource = 'src'
+def staticAnalysisIncludeFiles = '**/*.java'
+def staticAnalysisExcludeFiles = [
+        '**/R.java',
+        '**/BuildConfig.java',
+        '**/gen/**',
+        '**/java-gen/**',
+        '**/androidTest/**',
+        '**/tests/**',
+        '**/test/**',
+        '**/apt/**',
+        '**/build/**']
+
+task checkstyle(type: Checkstyle) {
+    description 'Run checkstyle'
+    ignoreFailures !checkStyleBlowOnError
+
+    configFile file("${qualityFolder}checkstyle-rules.xml")
+    configProperties.checkstyleSuppressionsPath = file("${qualityFolder}checkstyle-suppressions.xml").absolutePath
+    source staticAnalysisSource
+    include staticAnalysisIncludeFiles
+    exclude staticAnalysisExcludeFiles
+    classpath = files()
+}
+
+android {
+    lintOptions {
+        abortOnError lintBlowOnError
+
+        lintConfig file("${qualityFolder}lint.xml")
+        htmlOutput file("${reportsFolder}lint/lint.html")
+        htmlReport true
+    }
+}
+
+task findbugs(type: FindBugs, dependsOn: "assembleDebug") {
+    description 'Run findbugs'
+    ignoreFailures = !findBugsBlowOnError
+
+    effort = "max"
+    reportLevel = "high"
+    classes = files("${project.rootDir}/app/build/intermediates/classes")
+    classpath = files()
+
+    source staticAnalysisSource
+    include staticAnalysisIncludeFiles
+    exclude staticAnalysisExcludeFiles
+    excludeFilter = new File("${qualityFolder}findbugs-filter.xml")
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        xml {
+            destination "${reportsFolder}findbugs/findbugs.xml"
+        }
+        html {
+            destination "${reportsFolder}findbugs/findbugs.html"
+        }
+    }
+}
+
+task pmd(type: Pmd) {
+    description 'Run pmd'
+    ignoreFailures = !pmdBlowOnError
+
+    ruleSetFiles = files("${qualityFolder}pmd-rules.xml")
+    ruleSets = []
+
+    source staticAnalysisSource
+    include staticAnalysisIncludeFiles
+    exclude staticAnalysisExcludeFiles
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        xml {
+            destination "${reportsFolder}pmd/pmd.xml"
+        }
+        html {
+            destination "${reportsFolder}pmd/pmd.html"
+        }
+    }
+}
