@@ -28,7 +28,8 @@ import com.michaelfotiadis.dota2viewer.ui.image.ImageLoader;
 import com.michaelfotiadis.dota2viewer.ui.view.utils.RecyclerUtils;
 import com.michaelfotiadis.dota2viewer.utils.AppLog;
 import com.michaelfotiadis.dota2viewer.utils.TextUtils;
-import com.michaelfotiadis.dota2viewer.utils.dota.DotaGeneralUtils;
+import com.michaelfotiadis.dota2viewer.utils.dota.SearchFilterUtils;
+import com.michaelfotiadis.dota2viewer.utils.steam.SteamUrlUtils;
 import com.michaelfotiadis.steam.data.steam.player.library.Game;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -56,8 +57,8 @@ public class SteamLibraryFragment extends BaseRecyclerFragment<Game> implements 
     private List<Game> mData = new ArrayList<>();
 
     @Override
-    public void onListItemSelected(final View view, final Game item) {
-        // TODO implement
+    public void onListItemSelected(final View view, final Game game) {
+        getIntentDispatcher().open(view, SteamUrlUtils.buildUrlFromSteamGame(game));
     }
 
     @Override
@@ -66,7 +67,7 @@ public class SteamLibraryFragment extends BaseRecyclerFragment<Game> implements 
         if (TextUtils.isEmpty(query)) {
             mRecyclerManager.setItems(mData);
         } else {
-            mRecyclerManager.setItems(new ArrayList<>(DotaGeneralUtils.getFilteredLibrary(mData, query)));
+            mRecyclerManager.setItems(new ArrayList<>(SearchFilterUtils.getFilteredLibrary(mData, query)));
         }
 
     }
