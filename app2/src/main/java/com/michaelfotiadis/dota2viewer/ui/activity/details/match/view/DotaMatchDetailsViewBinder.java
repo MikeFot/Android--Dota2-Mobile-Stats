@@ -11,6 +11,7 @@ import com.michaelfotiadis.dota2viewer.ui.core.base.view.binder.BaseViewBinder;
 import com.michaelfotiadis.dota2viewer.ui.image.ImageLoader;
 import com.michaelfotiadis.dota2viewer.utils.dota.DotaGeneralUtils;
 import com.michaelfotiadis.dota2viewer.utils.dota.DotaMatchHelper;
+import com.michaelfotiadis.dota2viewer.utils.dota.DotaResourceUtils;
 import com.michaelfotiadis.dota2viewer.utils.format.FormattingUtils;
 import com.michaelfotiadis.steam.data.dota2.model.hero.Hero;
 import com.michaelfotiadis.steam.data.dota2.model.item.GameItem;
@@ -113,7 +114,7 @@ public class DotaMatchDetailsViewBinder extends BaseViewBinder<MatchStatsRowView
             mImageLoader.loadHero(holder.imageHero, hero.getName());
             final LeaverStatus leaverStatus = player.getLeaverStatusAsEnum();
             final String nameText;
-            final int leaverRes = DotaGeneralUtils.getLeaverStatus(leaverStatus);
+            final int leaverRes = DotaResourceUtils.getLeaverStatus(leaverStatus);
             if (leaverRes == 0) {
                 nameText = hero.getLocalizedName();
             } else {

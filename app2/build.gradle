@@ -1,7 +1,21 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 plugins {
     id "net.ltgt.apt" version "0.10"
 }
 apply plugin: 'com.android.application'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 apply plugin: 'io.fabric'
 apply from: '../buildsystem/quality/quality.gradle'
 apply from: '../buildsystem/custom_tasks.gradle'
@@ -118,10 +132,6 @@ dependencies {
     compile "com.android.support:customtabs:$rootProject.appCompatLibVersion"
     compile "com.android.support:support-vector-drawable:$rootProject.appCompatLibVersion"
 
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
-        transitive = true;
-    }
-
     // leak canary
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
@@ -173,6 +183,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+        transitive = true;
+    }
 
 
 }

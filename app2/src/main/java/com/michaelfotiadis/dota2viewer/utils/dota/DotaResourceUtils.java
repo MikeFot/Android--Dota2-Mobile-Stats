@@ -4,9 +4,15 @@ import android.support.annotation.StringRes;
 
 import com.michaelfotiadis.dota2viewer.R;
 import com.michaelfotiadis.steam.data.dota2.types.GameMode;
+import com.michaelfotiadis.steam.data.dota2.types.LeaverStatus;
 import com.michaelfotiadis.steam.data.dota2.types.LobbyType;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 public final class DotaResourceUtils {
+
+    private DotaResourceUtils() {
+    }
 
     @StringRes
     public static int getDescriptionForGameMode(final GameMode gameMode) {
@@ -127,4 +133,39 @@ public final class DotaResourceUtils {
         return resId;
     }
 
+    @StringRes
+    public static int getLeaverStatus(final LeaverStatus leaverStatus) {
+
+        @StringRes final int result;
+        switch (leaverStatus) {
+            case DISCONNECTED:
+                result = R.string.leaver_dc;
+                break;
+            case DISCONNECTED_TOO_LONG:
+                result = R.string.leaver_timeout;
+                break;
+            case ABANDONED:
+                result = R.string.leaver_abandon;
+                break;
+            case AFK:
+                result = R.string.leaver_afk;
+                break;
+            case NEVER_CONNECTED:
+                result = R.string.leaver_never_connected;
+                break;
+            case NEVER_CONNECTED_TOO_LONG:
+                result = R.string.leaver_never_connected_timeout;
+                break;
+            default:
+                result = 0;
+        }
+        return result;
+    }
+
+    public static String getHeroNameFromDataName(final String dataName) {
+
+        final String result = dataName.replaceAll("npc_dota_hero_", "").replaceAll("_", " ");
+        return WordUtils.capitalizeFully(result);
+
+    }
 }

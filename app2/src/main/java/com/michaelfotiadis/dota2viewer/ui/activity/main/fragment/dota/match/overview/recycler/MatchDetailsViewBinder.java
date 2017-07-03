@@ -16,7 +16,6 @@ import com.michaelfotiadis.dota2viewer.ui.core.base.recyclerview.viewbinder.Base
 import com.michaelfotiadis.dota2viewer.ui.image.ImageLoader;
 import com.michaelfotiadis.dota2viewer.ui.view.ThreeBarView;
 import com.michaelfotiadis.dota2viewer.ui.view.utils.SimpleSpanBuilder;
-import com.michaelfotiadis.dota2viewer.utils.dota.DotaGeneralUtils;
 import com.michaelfotiadis.dota2viewer.utils.dota.DotaMatchHelper;
 import com.michaelfotiadis.dota2viewer.utils.dota.DotaResourceUtils;
 import com.michaelfotiadis.dota2viewer.utils.dota.DotaTimeUtils;
@@ -82,7 +81,7 @@ public class MatchDetailsViewBinder extends BaseRecyclerViewBinder<MatchDetailsV
 
         if (helper.getPlayer() != null) {
 
-            final int leaverRes = DotaGeneralUtils.getLeaverStatus(helper.getPlayer().getLeaverStatusAsEnum());
+            final int leaverRes = DotaResourceUtils.getLeaverStatus(helper.getPlayer().getLeaverStatusAsEnum());
             if (leaverRes != 0) {
                 showView(holder.mTextLeaver, true);
                 holder.mTextLeaver.setText(getString(leaverRes));

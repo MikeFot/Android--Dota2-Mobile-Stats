@@ -23,7 +23,7 @@ public class LeagueListingRecyclerAdapter extends BaseRecyclerViewAdapter<League
 
     @Override
     protected boolean isItemValid(final League item) {
-        return item != null && TextUtils.isNotEmpty(item.getName());
+        return item != null && TextUtils.isNotEmpty(item.getName()) && TextUtils.isNotEmpty(item.getTournamentUrl());
     }
 
     @Override

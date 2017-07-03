@@ -27,6 +27,7 @@ public final class DotaStatsFactory {
     }
 
     public HeroStatistics getStatsForHero(final Hero hero) {
+
         int timesPlayed = 0;
         int timesWon = 0;
         int totalKills = 0;
@@ -63,7 +64,7 @@ public final class DotaStatsFactory {
             }
 
             final PlayerDetails player = matchHelper.getPlayer();
-            if (hero.getId().equals(player.getHeroId())) {
+            if (player != null && hero.getId().equals(player.getHeroId())) {
                 timesPlayed++;
                 if (matchHelper.isPlayerVictorious()) {
                     timesWon++;

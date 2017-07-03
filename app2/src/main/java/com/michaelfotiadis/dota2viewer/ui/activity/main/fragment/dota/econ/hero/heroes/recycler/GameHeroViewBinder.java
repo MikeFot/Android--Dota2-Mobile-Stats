@@ -7,7 +7,7 @@ import com.michaelfotiadis.dota2viewer.R;
 import com.michaelfotiadis.dota2viewer.ui.core.base.recyclerview.listener.OnItemSelectedListener;
 import com.michaelfotiadis.dota2viewer.ui.core.base.recyclerview.viewbinder.BaseRecyclerViewBinder;
 import com.michaelfotiadis.dota2viewer.ui.image.ImageLoader;
-import com.michaelfotiadis.dota2viewer.utils.dota.DotaGeneralUtils;
+import com.michaelfotiadis.dota2viewer.utils.dota.DotaResourceUtils;
 import com.michaelfotiadis.steam.data.dota2.model.hero.Hero;
 import com.michaelfotiadis.steam.provider.image.Size;
 
@@ -39,7 +39,7 @@ class GameHeroViewBinder extends BaseRecyclerViewBinder<GameHeroViewHolder, Hero
         holder.mTextId.setText(getContext().getString(R.string.hero_id, item.getId()));
         holder.mTextOriginal.setText(
                 getContext().getString(
-                        R.string.hero_original, DotaGeneralUtils.getHeroNameFromDataName(item.getName())));
+                        R.string.hero_original, DotaResourceUtils.getHeroNameFromDataName(item.getName())));
 
         holder.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override

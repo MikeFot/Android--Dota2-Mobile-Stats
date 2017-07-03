@@ -15,9 +15,6 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup, android:supportsRtl, android:label">
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="d936fe3caf46a1a4ffc49339b09d733af6a6b6b5"/>
 
         <activity android:name=".ui.activity.bootstrap.BootstrapActivity">
         </activity>
@@ -43,6 +40,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.michaelfotiadis.dota2viewer.ui.activity.main.MainActivity"/>
         </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="d936fe3caf46a1a4ffc49339b09d733af6a6b6b5"/>
     </application>
 
 </manifest>

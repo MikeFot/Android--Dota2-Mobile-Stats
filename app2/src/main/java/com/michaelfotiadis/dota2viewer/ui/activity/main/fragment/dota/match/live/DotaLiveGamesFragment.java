@@ -27,6 +27,7 @@ import com.michaelfotiadis.dota2viewer.ui.view.utils.RecyclerUtils;
 import com.michaelfotiadis.dota2viewer.utils.AppLog;
 import com.michaelfotiadis.dota2viewer.utils.TextUtils;
 import com.michaelfotiadis.dota2viewer.utils.dota.DotaGeneralUtils;
+import com.michaelfotiadis.dota2viewer.utils.dota.SearchFilterUtils;
 import com.michaelfotiadis.steam.data.dota2.model.hero.Hero;
 import com.michaelfotiadis.steam.data.dota2.model.leagues.League;
 import com.michaelfotiadis.steam.data.dota2.model.live.LiveGame;
@@ -174,7 +175,7 @@ public class DotaLiveGamesFragment extends BaseRecyclerFragment<LiveGame> implem
         if (TextUtils.isEmpty(query)) {
             mRecyclerManager.setItems(mGames);
         } else {
-            mRecyclerManager.setItems(new ArrayList<>(DotaGeneralUtils.getFilteredLiveGames(mGames, mLeagues, mHeroes, query)));
+            mRecyclerManager.setItems(new ArrayList<>(SearchFilterUtils.getFilteredLiveGames(mGames, mLeagues, mHeroes, query)));
         }
 
     }

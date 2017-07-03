@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.michaelfotiadis.dota2viewer.R;
 import com.michaelfotiadis.dota2viewer.utils.AppLog;
+import com.michaelfotiadis.dota2viewer.utils.TextUtils;
 import com.michaelfotiadis.steam.provider.image.ImageProvider;
 import com.michaelfotiadis.steam.provider.image.Size;
 import com.squareup.picasso.Picasso;
@@ -43,26 +44,44 @@ public class ImageLoader {
     }
 
     public void loadIntoImageView(final ImageView view, final String url) {
+        if (TextUtils.isEmpty(view.getContentDescription())) {
+            view.setContentDescription(url);
+        }
         mPicasso.load(url).error(R.drawable.ic_default).into(view);
     }
 
     public void loadIntoImageView(final ImageView view, final Uri uri) {
+        if (TextUtils.isEmpty(view.getContentDescription())) {
+            view.setContentDescription(uri.toString());
+        }
         mPicasso.load(uri).error(R.drawable.ic_default).into(view);
     }
 
     public void loadSteamGame(final ImageView view, final String appId, final String imageUrl) {
+        if (TextUtils.isEmpty(view.getContentDescription())) {
+            view.setContentDescription(imageUrl);
+        }
         this.loadIntoImageView(view, mImageProvider.getGameImageEndpoint(appId, imageUrl));
     }
 
     public void loadHero(final ImageView view, final String name) {
+        if (TextUtils.isEmpty(view.getContentDescription())) {
+            view.setContentDescription(name);
+        }
         this.loadIntoImageView(view, mImageProvider.getHeroImageEndpoint(name.replaceAll(" ", "_")));
     }
 
     public void loadHero(final ImageView view, final String name, final Size size) {
+        if (TextUtils.isEmpty(view.getContentDescription())) {
+            view.setContentDescription(name);
+        }
         this.loadIntoImageView(view, mImageProvider.getHeroImageEndpoint(name.replaceAll(" ", "_"), size));
     }
 
     public void loadItem(final ImageView view, final String name) {
+        if (TextUtils.isEmpty(view.getContentDescription())) {
+            view.setContentDescription(name);
+        }
         this.loadIntoImageView(view, mImageProvider.getItemImageEndpoint(name));
     }
 

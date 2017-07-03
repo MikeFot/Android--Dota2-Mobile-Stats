@@ -17,7 +17,6 @@
     <string name="ct_country_flag">Country flag</string>
     <string name="label_try_again">Try again</string>
 
-
     <string name="hero_id">ID: %1$d</string>
     <string name="hero_original">(%1$s)</string>
     <string name="title_sign_in">Add account</string>
@@ -61,7 +60,7 @@
     <string name="title_live_bans">Bans</string>
     <string name="match_id">Match ID:</string>
     <string name="hyphen">-</string>
-    <string name="duration">Duration:</string>
+    <string name="duration">Timer:</string>
     <string name="leaver_dc">Disconnected</string>
     <string name="leaver_timeout">Abandon (timeout)</string>
     <string name="leaver_abandon">Abandoned</string>

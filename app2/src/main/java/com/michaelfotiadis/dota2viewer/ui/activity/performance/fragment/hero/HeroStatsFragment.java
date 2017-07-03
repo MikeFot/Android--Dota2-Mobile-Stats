@@ -33,8 +33,8 @@ import com.michaelfotiadis.dota2viewer.ui.core.base.viewmanagement.UiStateKeeper
 import com.michaelfotiadis.dota2viewer.ui.image.ImageLoader;
 import com.michaelfotiadis.dota2viewer.utils.AppLog;
 import com.michaelfotiadis.dota2viewer.utils.TextUtils;
-import com.michaelfotiadis.dota2viewer.utils.dota.DotaGeneralUtils;
 import com.michaelfotiadis.dota2viewer.utils.dota.DotaStatsFactory;
+import com.michaelfotiadis.dota2viewer.utils.dota.SearchFilterUtils;
 import com.michaelfotiadis.steam.data.dota2.model.hero.Hero;
 import com.michaelfotiadis.steam.data.dota2.model.match.details.MatchDetails;
 
@@ -139,7 +139,7 @@ public class HeroStatsFragment extends BaseRecyclerFragment<HeroStatistics> {
         if (TextUtils.isEmpty(query)) {
             mRecyclerManager.setItems(mData);
         } else {
-            mRecyclerManager.setItems(DotaGeneralUtils.getFilteredHeroStatistics(mData, query));
+            mRecyclerManager.setItems(SearchFilterUtils.getFilteredHeroStatistics(mData, query));
         }
 
     }

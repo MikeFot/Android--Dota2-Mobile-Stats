@@ -70,7 +70,7 @@ public class Dota2Application extends Application implements LifecycleRegistryOw
                 .build();
 
         // Initialize Fabric with the debug-disabled crashlytics.
-        Fabric.with(this, crashlyticsKit);
+        Fabric.with(this, crashlyticsKit, new Crashlytics());
 
     }
 

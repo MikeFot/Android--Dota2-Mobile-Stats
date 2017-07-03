@@ -23,7 +23,7 @@ import com.michaelfotiadis.dota2viewer.ui.image.ImageLoader;
 import com.michaelfotiadis.dota2viewer.ui.view.utils.RecyclerUtils;
 import com.michaelfotiadis.dota2viewer.utils.AppLog;
 import com.michaelfotiadis.dota2viewer.utils.TextUtils;
-import com.michaelfotiadis.dota2viewer.utils.dota.DotaGeneralUtils;
+import com.michaelfotiadis.dota2viewer.utils.dota.SearchFilterUtils;
 import com.michaelfotiadis.steam.data.dota2.model.hero.Hero;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -116,7 +116,7 @@ public class DotaHeroesFragment extends BaseRecyclerFragment<Hero> implements On
         if (TextUtils.isEmpty(query)) {
             mRecyclerManager.setItems(mData);
         } else {
-            mRecyclerManager.setItems(DotaGeneralUtils.getFilteredHeroList(mData, query));
+            mRecyclerManager.setItems(SearchFilterUtils.getFilteredHeroList(mData, query));
         }
 
     }

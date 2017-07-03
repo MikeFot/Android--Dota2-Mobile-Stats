@@ -23,7 +23,7 @@ import com.michaelfotiadis.dota2viewer.ui.core.toast.AppToast;
 import com.michaelfotiadis.dota2viewer.ui.image.ImageLoader;
 import com.michaelfotiadis.dota2viewer.utils.AppLog;
 import com.michaelfotiadis.dota2viewer.utils.TextUtils;
-import com.michaelfotiadis.dota2viewer.utils.dota.DotaGeneralUtils;
+import com.michaelfotiadis.dota2viewer.utils.dota.SearchFilterUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -111,7 +111,7 @@ public class DotaHeroAttributesFragment extends BaseRecyclerFragment<HeroPatchAt
         if (TextUtils.isEmpty(query)) {
             mRecyclerManager.setItems(mData);
         } else {
-            mRecyclerManager.setItems(DotaGeneralUtils.getFilteredHeroPatchList(mData, query));
+            mRecyclerManager.setItems(SearchFilterUtils.getFilteredHeroPatchList(mData, query));
         }
 
     }
