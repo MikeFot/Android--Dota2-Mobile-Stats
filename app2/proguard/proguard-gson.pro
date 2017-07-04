@@ -20,9 +20,8 @@
     public static ** valueOf(java.lang.String);
 }
 
-# Application classes that will be serialized/deserialized over Gson
--keep class com.ovo.android.commonmodel.** { *; }
--keep class com.ovo.energy.internal.model.** { *; }
+-keep class com.google.gson.reflect.TypeToken { *; }
+-keep class com.google.gson.Gson { *; }
 
 # Prevent proguard from stripping interface information from TypeAdapterFactory,
 # JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)

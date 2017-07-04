@@ -186,7 +186,7 @@ public class DotaMatchOverviewFragment extends BaseFragment implements OnItemSel
     }
 
     protected void loadMore() {
-        if (mRecyclerManager.getItemCount() > 0 && mRecyclerManager.getItemCount() < MAX_MATCHES) {
+        if (mRecyclerManager.getItemCount() >= REQUESTED_INITIAL_MATCHES && mRecyclerManager.getItemCount() < MAX_MATCHES) {
             final Long lastId = mRecyclerManager.getLastValidId();
             if (lastId != null) {
                 // this is done on a new handler in order to show it on the next ui frame

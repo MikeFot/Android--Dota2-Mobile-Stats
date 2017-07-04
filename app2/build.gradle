@@ -48,7 +48,7 @@ android {
         versionCode androidVersionCode
         versionName semanticVersion
 
-        applicationId "com.michaelfotiadis.dota2viewer"
+        applicationId "com.michaelfotiadis.mobiledota2"
 
         vectorDrawables.useSupportLibrary = true
 
@@ -118,12 +118,24 @@ android {
         }
     }
 
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
 
 }
 
 dependencies {
 
-
+    // support and design libraries
     compile "com.android.support:support-v13:$rootProject.appCompatLibVersion"
     compile "com.android.support:appcompat-v7:$rootProject.appCompatLibVersion"
     compile "com.android.support:cardview-v7:$rootProject.appCompatLibVersion"
@@ -131,6 +143,7 @@ dependencies {
     compile "com.android.support:design:$rootProject.appCompatLibVersion"
     compile "com.android.support:customtabs:$rootProject.appCompatLibVersion"
     compile "com.android.support:support-vector-drawable:$rootProject.appCompatLibVersion"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // leak canary
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
@@ -147,6 +160,7 @@ dependencies {
     compile('com.mikepenz:materialdrawer:5.9.2@aar') {
         transitive = true
     }
+    // optional iconics
     compile 'com.mikepenz:google-material-typeface:3.0.1.0.original@aar'
     compile 'com.mikepenz:fontawesome-typeface:4.7.0.0@aar'
 
@@ -160,15 +174,13 @@ dependencies {
     // Alex's resource mirror
     compile 'uk.co.alt236:resource-mirror-android:1.0.0'
 
-
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.douglasjunior:android-simple-tooltip:0.2.0'
     compile 'net.danlew:android.joda:2.9.9'
     compile 'com.birbit:android-priority-jobqueue:2.0.1'
     compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
-    // charting library, one version old
+    // charting library, one version old (current is 3++)
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
 
     // architectural components
