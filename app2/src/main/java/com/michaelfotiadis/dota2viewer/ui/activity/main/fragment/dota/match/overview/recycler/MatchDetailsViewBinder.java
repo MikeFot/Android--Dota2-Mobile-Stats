@@ -1,10 +1,12 @@
 package com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.match.overview.recycler;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.TextView;
 
@@ -109,9 +111,9 @@ public class MatchDetailsViewBinder extends BaseRecyclerViewBinder<MatchDetailsV
         final SimpleSpanBuilder sb = new SimpleSpanBuilder()
                 .append(getString(R.string.prefix_kda))
                 .append(String.valueOf(helper.getPlayerKills()), new ForegroundColorSpan(holder.mColorKills))
-                .append("/")
+                .append(" / ", new StyleSpan(Typeface.BOLD))
                 .append(String.valueOf(helper.getPlayerDeaths()), new ForegroundColorSpan(holder.mColorDeaths))
-                .append("/")
+                .append(" / ", new StyleSpan(Typeface.BOLD))
                 .append(String.valueOf(helper.getPlayerAssists()), new ForegroundColorSpan(holder.mColorAssists));
 
 

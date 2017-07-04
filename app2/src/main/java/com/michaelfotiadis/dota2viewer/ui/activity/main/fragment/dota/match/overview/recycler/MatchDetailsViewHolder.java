@@ -13,7 +13,7 @@ import com.michaelfotiadis.dota2viewer.ui.view.ThreeBarView;
 import butterknife.BindColor;
 import butterknife.BindView;
 
-public class MatchDetailsViewHolder extends BaseRecyclerViewHolder {
+class MatchDetailsViewHolder extends BaseRecyclerViewHolder {
 
 
     @LayoutRes
@@ -41,14 +41,14 @@ public class MatchDetailsViewHolder extends BaseRecyclerViewHolder {
     @BindView(R.id.card_view)
     CardView mCardView;
 
-    @BindColor(R.color.map_green_radiant_light)
+    @BindColor(R.color.md_green_500)
     int mColorKills;
-    @BindColor(R.color.map_red_dire_light)
+    @BindColor(R.color.md_red_500)
     int mColorDeaths;
-    @BindColor(R.color.md_blue_700)
+    @BindColor(R.color.md_light_blue_500)
     int mColorAssists;
 
-    protected MatchDetailsViewHolder(final View view) {
+    MatchDetailsViewHolder(final View view) {
         super(view);
     }
 

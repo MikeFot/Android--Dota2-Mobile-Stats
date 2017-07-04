@@ -110,9 +110,9 @@ public class FetchDotaMatchOverviewsJob extends BaseJob {
 
         if (System.currentTimeMillis() - mDataPreferences.getMatchOverviewUpdated(mSteamId3) < UPDATE_THRESHOLD) {
             final List<DotaMatchOverviewEntity> items = mDb.getDotaMatchOverviewDao().getByUserIdSync(mSteamId3);
-            if (mStartAtMatchId == null && items != null && !items.isEmpty()) {
+            if (mStartAtMatchId == null && items != null && !items.isEmpty() && items.size() >= mRequestedMatches) {
                 AppLog.d("Match Overview Entity data is valid, no reason to run network call");
-                onJobFinished();
+                onOverviewsFetched();
             } else {
                 fetchDataFromNet(mStartAtMatchId);
             }
@@ -158,7 +158,7 @@ public class FetchDotaMatchOverviewsJob extends BaseJob {
                                         mDataPreferences.writeMatchOverviewUpdated(mSteamId3, System.currentTimeMillis());
 
                                         if (isThereDataOverlap(existingItems, overviews)) {
-                                            onJobFinished();
+                                            onOverviewsFetched();
                                         } else {
 
                                             final Long nextMatchId = overviews.get(overviews.size() - 1).getMatchId();
@@ -182,7 +182,7 @@ public class FetchDotaMatchOverviewsJob extends BaseJob {
                 });
     }
 
-    private void onJobFinished() {
+    private void onOverviewsFetched() {
 
         final List<DotaMatchOverviewEntity> dbOverviews = mDb.getDotaMatchOverviewDao().getByUserIdSync(mSteamId3);
 
