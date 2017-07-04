@@ -21,6 +21,8 @@ class LoginViewHolder extends BaseViewHolder {
     Button mLoginButton;
     @BindView(R.id.button_steam)
     Button mSteamButton;
+    @BindView(R.id.button_popular)
+    Button mPopularButton;
 
     LoginViewHolder(final View view) {
         super(view);

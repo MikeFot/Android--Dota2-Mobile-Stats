@@ -21,8 +21,8 @@ public class JobScheduler {
         mJobPriorityQueue.clear();
     }
 
-    public void startFetchPlayersJob(@NonNull final String username) {
-        mJobPriorityQueue.queueJob(mFactory.getFetchPlayersJob(username));
+    public void startFetchPlayersJob(@NonNull final String username, final boolean storeToDb) {
+        mJobPriorityQueue.queueJob(mFactory.getFetchPlayersJob(username, storeToDb));
     }
 
     public void startFetchLibraryJob(@NonNull final String steamId) {

@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.michaelfotiadis.dota2viewer.R;
 import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.main.LoginFragment;
+import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.popular.PopularPlayersFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.result.PlayerPickerFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.web.WebViewFragment;
 import com.michaelfotiadis.dota2viewer.ui.core.base.activity.BaseActivity;
@@ -78,6 +79,11 @@ public class LoginActivity extends BaseActivity implements LoginNavigationComman
     @Override
     public void showHelp(final View view) {
         // TODO implement this!!!!
+    }
+
+    @Override
+    public void onNavigateToPopular(final View view) {
+        replaceContentFragment(PopularPlayersFragment.newInstance(), CONTENT_ID, FRAGMENT_TAG);
     }
 
     @Override

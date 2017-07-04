@@ -54,7 +54,7 @@
     <string name="dota_data_unavailable">Data private</string>
     <string name="toast_fetching_more">Fetching %1$d additional matches</string>
     <string name="toast_fetched_max_matches">Fetched maximum number of matches</string>
-    <string name="toast_data_loaded">%1$d Matches loaded</string>
+    <string name="toast_data_loaded">Loaded %1$d matches</string>
     <string name="net_worth">Team Net Worth: %1$d</string>
     <string name="title_live_picks">Picks</string>
     <string name="title_live_bans">Bans</string>
@@ -90,4 +90,6 @@
     <string name="dialog_delete_user_body">"Are you sure you want to delete user '%1$s'?"</string>
     <string name="dialog_delete_title">Delete user</string>
     <string name="message_cancel">Cancel</string>
+    <string name="text_info_select_popular">You could alternatively try selecting a popular player\'s profile.</string>
+    <string name="text_button_select_popular">Select a popular player</string>
 </resources>

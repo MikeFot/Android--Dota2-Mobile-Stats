@@ -1,7 +1,9 @@
 package com.michaelfotiadis.dota2viewer.ui.activity.main;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -143,11 +145,13 @@ public final class DrawerFactory {
             builder.withSavedInstance(mSavedInstanceState);
         }
 
+
         IProfile currentProfile = null;
         if (playerEntities.isEmpty()) {
             final IProfile addUserProfile = new ProfileDrawerItem()
                     .withName(R.string.account_header_add_title)
                     .withEmail(R.string.account_header_add_email)
+                    .withIcon(getAddUserDrawable(R.color.md_black_1000))
                     .withIdentifier(PROFILE_ADD);
             builder.addProfiles(addUserProfile);
         } else {
@@ -166,15 +170,26 @@ public final class DrawerFactory {
             builder.addProfiles(new ProfileSettingDrawerItem()
                     .withName("Add Account")
                     .withDescription("Add new Steam Account")
-                    .withIcon(new IconicsDrawable(mActivity, FontAwesome.Icon.faw_plus)
-                            .actionBar()
-                            .paddingDp(5)
-                            .colorRes(R.color.primary_text))
+                    .withIcon(getAddUserDrawable(R.color.md_black_1000))
                     .withIdentifier(PROFILE_ADD)
             );
         }
 
+
         if (mNavigationListener != null) {
+
+            builder.withOnAccountHeaderItemLongClickListener(new AccountHeader.OnAccountHeaderItemLongClickListener() {
+                @Override
+                public boolean onProfileLongClick(final View view, final IProfile profile, final boolean current) {
+                    if (profile.getIdentifier() == PROFILE_ADD) {
+                        return false;
+                    } else {
+                        mNavigationListener.onDeleteProfile(profile.getIdentifier());
+                        return true;
+                    }
+                }
+            });
+
             builder.withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                 @Override
                 public boolean onProfileChanged(final View view, final IProfile profile, final boolean current) {
@@ -184,9 +199,12 @@ public final class DrawerFactory {
                         return true;
                     } else if (!current) {
                         mNavigationListener.onProfileSelected(view, profile.getIdentifier());
+                        return true;
+                    } else {
+                        return false;
                     }
 
-                    return false;
+
                 }
             });
         }
@@ -207,5 +225,11 @@ public final class DrawerFactory {
                 .withEmail(playerSummary.getPersonaName());
     }
 
+    private Drawable getAddUserDrawable(@ColorRes int tint) {
+        return new IconicsDrawable(mActivity, FontAwesome.Icon.faw_plus)
+                .actionBar()
+                .paddingDp(6)
+                .colorRes(tint).mutate();
+    }
 
 }

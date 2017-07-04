@@ -30,4 +30,103 @@
         <item>@color/md_red_500</item>
         <item>@color/md_red_600</item>
     </array>
+
+    <string-array name="popular_players">
+        <item>-Attacker,118305301</item>
+        <item>1437 - Sivatheeban Sivanathapillai,87196890</item>
+        <item>9Pasha - Pavel Khvastunov,92423451</item>
+        <item>Abed - Abed Azel L. Yusop,154715080</item>
+        <item>Akke - Joakim Akterhall,41288955</item>
+        <item>Alliance.AdmiralBulldog,76482434</item>
+        <item>Aloshka - Korobkin Ilya,123051238</item>
+        <item>Amy - 徐帜,135384059</item>
+        <item>ana - Anathan Pham,311360822</item>
+        <item>Ar1sE- - Turtoi Ionut,96169991</item>
+        <item>Arteezy - Artour Babaev,86745912</item>
+        <item>Aui_2000 - Kurtis Ling,40547474</item>
+        <item>BananaSlamJamma - Brian Canavan,105178768</item>
+        <item>Biver - Malthe Winther,109512357</item>
+        <item>Black^ - Dominik Reitmeier,21289303</item>
+        <item>BuLba - Kanishka Sosale,30237211</item>
+        <item>BurNIng - Xu Zhilei,90892734</item>
+        <item>CCnC - Quinn Callahan,221666230</item>
+        <item>Chappie - Vladimir Kuzmenko,132739889</item>
+        <item>ChuaN - 黄福全,88553213</item>
+        <item>Cr1t- - Andreas Franck,25907144</item>
+        <item>DeMoN - Jimmy Ho,85805514</item>
+        <item>Dendi - Danylo Ishutin,70388657</item>
+        <item>DuBu - Doo-young Kim,145550466</item>
+        <item>EG.ppd - Peter Dager,86727555</item>
+        <item>EGM - Jerry Lundkvist,3916428</item>
+        <item>EternaLEnVy - Jacky Mao,43276219</item>
+        <item>Fata - Adrian Trinks,86799300</item>
+        <item>Fly - Tal Aizik,94155156</item>
+        <item>fn - Rostyslav Lozovoi,5150808</item>
+        <item>fng - Artsiom Barshak,94049589</item>
+        <item>focus,110448679</item>
+        <item>Forev - Sang Don Lee,88933594</item>
+        <item>Freedom.ixmike88 - Michael Ghannam,86715129</item>
+        <item>Funn1k - Gleb Lipatnikov,86723143</item>
+        <item>fy - 徐林森,101695162</item>
+        <item>G - Bragin Sergey,87586992</item>
+        <item>GeneRaL - Viktor Nigrini,89550641</item>
+        <item>Gh - Maroun Merhej,101356886</item>
+        <item>H4nn1 - Kai Hanbueckers,21265941</item>
+        <item>iceiceice - Daryl Koh Pei Xiang,84772440</item>
+        <item>Illidan Stormrage,26316691</item>
+        <item>iLTW - Igor Filatov,113995822</item>
+        <item>inYourdreaM - Muhammad Rizky Anugrah,181716137</item>
+        <item>JerAx - Jesse Vainikka,26771994</item>
+        <item>KheZu - Maurice Gutmann,169025618</item>
+        <item>kpii - Damien Chok,87012746</item>
+        <item>KuroKy - Kuro Salehi Takhasomi,82262664</item>
+        <item>lil - Ilya Ilyuk,106809101</item>
+        <item>Loda - Jonathan Berg,101495620</item>
+        <item>Mag - Andrew Chipenko,86802844</item>
+        <item>MATUMBAMAN - Lasse Aukusti  Urpalainen,72312627</item>
+        <item>Meracle- - Galvin Kang Jian Wen,91369376</item>
+        <item>MidOne - Yeik Nai Zheng,116585378</item>
+        <item>Miracle- - Amer Al-Barkawi,105248644</item>
+        <item>MISERY - Rasmus Berth-Filipsen,87382579</item>
+        <item>monkeys-forever - Jaron Clinton,86811043</item>
+        <item>Moo - David Hull,84429681</item>
+        <item>MoonS - David Tan,38628747</item>
+        <item>MP - Pyo No-a,101450083</item>
+        <item>MSS - Arif Anwar,86726887</item>
+        <item>Mushi - Chai Yee fung,89871557</item>
+        <item>n0tail - Johan Sundstein,19672354</item>
+        <item>Newbee.B.Ferrari_430,88585077</item>
+        <item>Newbee.B.xiao8 - 张宁,98887913</item>
+        <item>NiP.qojqva - Max Broecker,86738694</item>
+        <item>No[o]ne - Vladimir Minenko,106573901</item>
+        <item>NutZ - Wong Jeng Yih,89603649</item>
+        <item>Pajkatt - Per Anders Olsson Lille,87285329</item>
+        <item>Paparazi灬 - 张成俊,137193239</item>
+        <item>PieLieDie - Johan Astrom,6922000</item>
+        <item>Puppey - Clement Ivanov,87278757</item>
+        <item>QO - Sunyeob Kim,93119769</item>
+        <item>RAMZES666 - Roman Kushnarev,132851371</item>
+        <item>Resolut1on - Roman Fomynok,86725175</item>
+        <item>s4 - Gustav Magnusson,41231571</item>
+        <item>Sccc - 宋淳,149486894</item>
+        <item>Slayer - Kryvulia Semen,91460772</item>
+        <item>SmAsH - Freddy Sina,118073569</item>
+        <item>Solo - Alexey Berezin,134556694</item>
+        <item>Somnus、M - 路垚,106863163</item>
+        <item>SoNNeikO - Akbar Butaev,117421467</item>
+        <item>SumaiL - Sumail Hassan,111620041</item>
+        <item>Super - 谢俊豪,90882159</item>
+        <item>syndereN - Troels Nielsen,4281729</item>
+        <item>Trixi - Kalle Saarinen,8712306</item>
+        <item>Universe - Saahil Arora,87276347</item>
+        <item>VANSKOR - Ivan Skorokhod,11550182</item>
+        <item>w33 - Omar Aliwi,86700461</item>
+        <item>XBOCT,89625472</item>
+        <item>xy - Toh Wai Hong,85417034</item>
+        <item>YapzOr - Yazied Jaradat,89117038</item>
+        <item>Yawar - Yawar Hassan,108452107</item>
+        <item>YYF,90045009</item>
+        <item>zai - Ludwig Wåhlberg,73562326</item>
+    </string-array>
+
 </resources>

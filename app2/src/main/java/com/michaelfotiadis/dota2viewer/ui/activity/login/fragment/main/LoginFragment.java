@@ -14,7 +14,6 @@ import com.michaelfotiadis.dota2viewer.data.loader.JobScheduler;
 import com.michaelfotiadis.dota2viewer.data.loader.error.ErrorKind;
 import com.michaelfotiadis.dota2viewer.data.persistence.error.UiDataLoadError;
 import com.michaelfotiadis.dota2viewer.data.persistence.error.UiDataLoadErrorFactory;
-import com.michaelfotiadis.dota2viewer.event.listener.EventLifecycleListener;
 import com.michaelfotiadis.dota2viewer.event.steam.FetchedPlayersEvent;
 import com.michaelfotiadis.dota2viewer.injection.Injector;
 import com.michaelfotiadis.dota2viewer.ui.activity.login.LoginNavigationCommand;
@@ -32,14 +31,13 @@ public class LoginFragment extends BaseFragment implements LoginActionCallbacks 
 
     @Inject
     JobScheduler mJobScheduler;
-    private EventLifecycleListener mEventLifecycleListener;
     private LoginPresenter mLoginPresenter;
 
     @Override
     public void login(@NonNull final String username) {
         hideKeyboard();
         mLoginPresenter.showProgress();
-        mJobScheduler.startFetchPlayersJob(username);
+        mJobScheduler.startFetchPlayersJob(username, false);
     }
 
     @Override
@@ -53,6 +51,13 @@ public class LoginFragment extends BaseFragment implements LoginActionCallbacks 
     public void showSteamLogin(final View view) {
         if (getActivity() instanceof LoginNavigationCommand) {
             ((LoginNavigationCommand) getActivity()).showSteamLogin(view);
+        }
+    }
+
+    @Override
+    public void onPopularSelected(final View view) {
+        if (getActivity() instanceof LoginNavigationCommand) {
+            ((LoginNavigationCommand) getActivity()).onNavigateToPopular(view);
         }
     }
 

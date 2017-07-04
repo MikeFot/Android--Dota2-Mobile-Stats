@@ -4,6 +4,7 @@ import com.michaelfotiadis.dota2viewer.Dota2Application;
 import com.michaelfotiadis.dota2viewer.data.loader.jobs.JobFactory;
 import com.michaelfotiadis.dota2viewer.ui.activity.details.match.DotaMatchDetailsFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.main.LoginFragment;
+import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.popular.PopularPlayersFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.result.PlayerPickerFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.web.WebViewFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.MainActivity;
@@ -62,4 +63,7 @@ public interface AndroidAwareComponent {
     void inject(JobFactory jobFactory);
 
     void inject(WebViewFragment webViewFragment);
+
+    void inject(PopularPlayersFragment popularPlayersFragment);
+
 }

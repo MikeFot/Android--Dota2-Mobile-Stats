@@ -47,9 +47,11 @@ public class JobFactory {
         Injector.getComponentStore().getAndroidAwareComponent().inject(this);
     }
 
-    public FetchPlayersJob getFetchPlayersJob(@NonNull final String username) {
+    public FetchPlayersJob getFetchPlayersJob(@NonNull final String username,
+                                              final boolean storeToDb) {
         return new FetchPlayersJob(
                 username,
+                storeToDb,
                 mSteamLoader.getUsersProvider(),
                 mAppDatabase.getPlayerDao(),
                 mDataPreferences,

@@ -48,7 +48,7 @@ public class SteamProfileFragment extends BaseUserRecyclerFragment {
         mRecyclerManager.clearError();
         mRecyclerManager.updateUiState(State.PROGRESS);
         if (TextUtils.isNotEmpty(getCurrentUserId())) {
-            mJobScheduler.startFetchPlayersJob(getCurrentUserId());
+            mJobScheduler.startFetchPlayersJob(getCurrentUserId(), true);
         } else {
             if (mDeleteItem != null) {
                 mDeleteItem.setVisible(false);

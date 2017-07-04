@@ -16,7 +16,6 @@ import android.widget.ViewFlipper;
 
 import com.michaelfotiadis.dota2viewer.R;
 import com.michaelfotiadis.dota2viewer.data.loader.JobScheduler;
-import com.michaelfotiadis.dota2viewer.data.persistence.db.DbCallback;
 import com.michaelfotiadis.dota2viewer.data.persistence.db.accessor.DbAccessor;
 import com.michaelfotiadis.dota2viewer.data.persistence.preference.UserPreferences;
 import com.michaelfotiadis.dota2viewer.event.steam.FetchedPlayersEvent;
@@ -116,7 +115,7 @@ public class WebViewFragment extends BaseFragment {
                     // Do whatever you want with the user's steam id
 
                     getNotificationController().showInfo("Fetching played data");
-                    mJobScheduler.startFetchPlayersJob(userId);
+                    mJobScheduler.startFetchPlayersJob(userId, true);
 
                 }
             }
@@ -139,29 +138,12 @@ public class WebViewFragment extends BaseFragment {
             final PlayerSummary playerSummary = event.getPlayers().get(0);
             AppLog.d("User selected with ID= " + playerSummary.getSteamId());
 
-            mDbAccessor.getPlayerAccessor().insert(playerSummary, new DbCallback() {
+            new UserPreferences(getContext()).writeCurrentUserId(playerSummary.getSteamId());
+            getActivity().runOnUiThread(new Runnable() {
                 @Override
-                public void onSuccess() {
-                    new UserPreferences(getContext()).writeCurrentUserId(playerSummary.getSteamId());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            AppLog.d("User written with ID " + getCurrentUserId());
-                            AppToast.show(getContext(), String.format("User selected: %s", playerSummary.getPersonaName()));
-                            getIntentDispatcher().openMainActivity(null);
-                        }
-                    });
-                }
-
-                @Override
-                public void onFailure() {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            AppToast.show(getContext(), "Something has gone wrong. Please try again.");
-                            getActivity().finish();
-                        }
-                    });
+                public void run() {
+                    AppToast.show(getContext(), String.format("User selected: %s", playerSummary.getPersonaName()));
+                    getIntentDispatcher().openMainActivity(null);
                 }
             });
         } else {

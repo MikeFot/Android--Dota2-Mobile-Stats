@@ -33,18 +33,21 @@ public class FetchPlayersJob extends BaseJob {
     private static final long UPDATE_THRESHOLD = TimeUnit.MINUTES.toMillis(5);
 
     private final String mUsername;
+    private final boolean mStoreItToDb;
     private final UsersApiProvider mApi;
     private final DataPreferences mDataPreferences;
     private final NetworkResolver mNetworkResolver;
     private final PlayerDao mDao;
 
     public FetchPlayersJob(@NonNull final String username,
+                           final boolean isStore,
                            @NonNull final UsersApiProvider api,
                            @NonNull final PlayerDao dao,
                            @NonNull final DataPreferences dataPreferences,
                            final NetworkResolver networkResolver) {
         super();
         mUsername = username;
+        mStoreItToDb = isStore;
         mApi = api;
         mDao = dao;
         mDataPreferences = dataPreferences;
@@ -140,17 +143,20 @@ public class FetchPlayersJob extends BaseJob {
                     public void onSuccess(final ResponseContainer<PlayerSummaries> result) {
                         AppLog.d(result.getResponse().getPlayers().size() + " results fetched");
                         if (result.getResponse() != null) {
+                            if (mStoreItToDb) {
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // we need to move back to a BG thread as Retrofit 2 callback is on Main
+                                        final List<PlayerEntity> entities = PlayerEntity.fromPlayerSummaries(result.getResponse().getPlayers());
+                                        mDao.insert(entities);
+                                        mDataPreferences.writeProfileUpdated(id64.toString(), System.currentTimeMillis());
 
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    // we need to move back to a BG thread as Retrofit 2 callback is on Main
-                                    final List<PlayerEntity> entities = PlayerEntity.fromPlayerSummaries(result.getResponse().getPlayers());
-                                    mDao.insert(entities);
-                                    mDataPreferences.writeProfileUpdated(id64.toString(), System.currentTimeMillis());
-                                    postResult(result.getResponse().getPlayers());
-                                }
-                            }).start();
+                                    }
+                                }).start();
+                            } else {
+                                postResult(result.getResponse().getPlayers());
+                            }
 
                         } else {
                             postError(new Error(ErrorKind.INVALID_CONTENT));

@@ -56,7 +56,7 @@ import butterknife.ButterKnife;
 public class DotaMatchOverviewFragment extends BaseFragment implements OnItemSelectedListener<MatchItem> {
 
     private static final int MAX_MATCHES = 200;
-    private static final int REQUESTED_INITIAL_MATCHES = 30;
+    private static final int REQUESTED_INITIAL_MATCHES = 15;
     private static final int REQUESTED_ADDITIONAL_MATCHES = 10;
 
     @BindView(R.id.recycler_view)

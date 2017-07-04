@@ -3,6 +3,7 @@ package com.michaelfotiadis.dota2viewer.ui.activity.main;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -28,6 +29,7 @@ import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.econ.item.
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.match.DotaMatchNavFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.SteamUserNavFragment;
 import com.michaelfotiadis.dota2viewer.ui.core.base.activity.BaseActivity;
+import com.michaelfotiadis.dota2viewer.ui.core.dialog.alert.AlertDialogFactory;
 import com.michaelfotiadis.dota2viewer.ui.image.ImageLoader;
 import com.michaelfotiadis.dota2viewer.utils.AppLog;
 import com.michaelfotiadis.dota2viewer.utils.TextUtils;
@@ -227,7 +229,32 @@ public class MainActivity extends BaseActivity {
                     AppLog.d("User changed to id " + textId);
                     new UserPreferences(MainActivity.this).writeCurrentUserId(textId);
                     EventBus.getDefault().post(new UserChangedEvent(textId));
+                    mDrawer.closeDrawer();
                 }
+            }
+
+            @Override
+            public void onDeleteProfile(final long identifier) {
+                final DialogInterface.OnClickListener okListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int which) {
+                        mJobScheduler.startDeleteProfileJob(String.valueOf(identifier));
+                        dialog.dismiss();
+                    }
+                };
+                final DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int which) {
+                        dialog.dismiss();
+                    }
+                };
+
+                new AlertDialogFactory(MainActivity.this).show(
+                        getString(R.string.dialog_delete_title),
+                        getString(R.string.dialog_delete_user_body, String.valueOf(identifier)),
+                        getString(R.string.message_ok), okListener,
+                        getString(R.string.message_cancel), cancelListener);
+
             }
         };
     }
@@ -297,6 +324,9 @@ public class MainActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onUserDeletedEvent(final UserDeletedEvent event) {
+        if (mDrawer != null) {
+            mDrawer.closeDrawer();
+        }
         initDrawer(
                 getDrawerFactory(null),
                 getAccountHeader(event.getPlayerEntities(), event.getNextId()));

@@ -13,4 +13,6 @@ public interface LoginNavigationCommand {
     void showSteamLogin(View view);
 
     void showHelp(View view);
+
+    void onNavigateToPopular(View view);
 }

@@ -16,4 +16,5 @@ interface NavigationListener {
 
     void onProfileSelected(final View view, long identifier);
 
+    void onDeleteProfile(long identifier);
 }
