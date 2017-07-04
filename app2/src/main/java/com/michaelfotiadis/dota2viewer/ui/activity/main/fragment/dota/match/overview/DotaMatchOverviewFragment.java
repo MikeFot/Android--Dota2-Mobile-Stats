@@ -195,7 +195,8 @@ public class DotaMatchOverviewFragment extends BaseFragment implements OnItemSel
                     public void run() {
                         mRecyclerManager.addLoadingItem();
                         AppLog.d("ScrollListener: Loading more for last ID " + lastId);
-                        mJobScheduler.startFetchDotaMatchOverviewsJob(String.valueOf(mCurrentUserId3), lastId, REQUESTED_ADDITIONAL_MATCHES, true, false);
+                        // matches + 1 because initial Sequence Number match will be included in the results
+                        mJobScheduler.startFetchDotaMatchOverviewsJob(String.valueOf(mCurrentUserId3), lastId, REQUESTED_ADDITIONAL_MATCHES + 1, true, false);
 
                     }
                 }, 100);

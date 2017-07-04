@@ -8,10 +8,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.transition.Slide;
 import android.view.Gravity;
+import android.view.View;
 
 import com.michaelfotiadis.dota2viewer.R;
 import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.main.LoginFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.result.PlayerPickerFragment;
+import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.web.WebViewFragment;
 import com.michaelfotiadis.dota2viewer.ui.core.base.activity.BaseActivity;
 import com.michaelfotiadis.dota2viewer.utils.AppLog;
 import com.michaelfotiadis.steam.data.steam.users.user.PlayerSummary;
@@ -66,6 +68,16 @@ public class LoginActivity extends BaseActivity implements LoginNavigationComman
 
         fragmentTransaction.commit();
 
+    }
+
+    @Override
+    public void showSteamLogin(final View view) {
+        replaceContentFragment(WebViewFragment.newInstance(), CONTENT_ID, FRAGMENT_TAG);
+    }
+
+    @Override
+    public void showHelp(final View view) {
+        // TODO implement this!!!!
     }
 
     @Override

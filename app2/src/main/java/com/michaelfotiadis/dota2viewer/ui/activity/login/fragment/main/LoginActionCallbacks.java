@@ -9,4 +9,5 @@ public interface LoginActionCallbacks {
 
     void showLoginHelp(View view);
 
+    void showSteamLogin(View view);
 }

@@ -1,0 +1,18 @@
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/view_flipper"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent"
+             android:layout_margin="@dimen/margin_8dp">
+
+    <include
+        layout="@layout/includable_default_progress"/>
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
+</ViewFlipper>
+
+
+

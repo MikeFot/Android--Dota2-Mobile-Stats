@@ -12,5 +12,6 @@
     <include
         layout="@layout/includable_default_progress"/>
 
+
 </ViewFlipper>
 

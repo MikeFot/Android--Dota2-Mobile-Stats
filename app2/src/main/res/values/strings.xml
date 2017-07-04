@@ -83,4 +83,11 @@
     <string name="prefix_kda">"KDA: "</string>
     <string name="placeholder_last_hits">"Last hits: %1$d / Denies: %2$d"</string>
 
+    <string name="intro">If you do not know the account id you are looking for, you can try logging in through Steam instead. \nThis application uses Steam OpenID to authenticate the user through Valve\'s servers. This is done in order to protect your personal information.
+        \n\nYour username and password will not be stored by the application nor will the creator have access to any data downloaded by the application.
+    \n</string>
+    <string name="sign_in">Sign in</string>
+    <string name="dialog_delete_user_body">"Are you sure you want to delete user '%1$s'?"</string>
+    <string name="dialog_delete_title">Delete user</string>
+    <string name="message_cancel">Cancel</string>
 </resources>

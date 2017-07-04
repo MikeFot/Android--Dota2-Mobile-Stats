@@ -1,6 +1,5 @@
 package com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.result;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -86,7 +85,6 @@ public class PlayerPickerFragment extends BaseUserRecyclerFragment implements On
                     @Override
                     public void run() {
                         AppToast.show(getContext(), "Something has gone wrong. Please try again.");
-                        getActivity().setResult(Activity.RESULT_CANCELED);
                         getActivity().finish();
                     }
                 });

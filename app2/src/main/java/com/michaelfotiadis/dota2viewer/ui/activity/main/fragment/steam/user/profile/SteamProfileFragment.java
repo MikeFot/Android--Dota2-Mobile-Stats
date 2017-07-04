@@ -1,6 +1,7 @@
 package com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.profile;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.result.PlayerW
 import com.michaelfotiadis.dota2viewer.ui.core.base.error.errorpage.QuoteOnClickListenerWrapper;
 import com.michaelfotiadis.dota2viewer.ui.core.base.fragment.BaseFragment;
 import com.michaelfotiadis.dota2viewer.ui.core.base.recyclerview.manager.State;
+import com.michaelfotiadis.dota2viewer.ui.core.dialog.alert.AlertDialogFactory;
 import com.michaelfotiadis.dota2viewer.utils.TextUtils;
 import com.michaelfotiadis.steam.data.steam.users.user.PlayerSummary;
 
@@ -103,8 +105,27 @@ public class SteamProfileFragment extends BaseUserRecyclerFragment {
 
     private void deleteUser(@Nullable final String idToDelete) {
 
+        final DialogInterface.OnClickListener okListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                mJobScheduler.startDeleteProfileJob(idToDelete);
+                dialog.dismiss();
+            }
+        };
+        final DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                dialog.dismiss();
+            }
+        };
+
         if (TextUtils.isNotEmpty(idToDelete)) {
-            mJobScheduler.startDeleteProfileJob(idToDelete);
+            new AlertDialogFactory(getActivity()).show(
+                    getString(R.string.dialog_delete_title),
+                    getString(R.string.dialog_delete_user_body, idToDelete),
+                    getString(R.string.message_ok), okListener,
+                    getString(R.string.message_cancel), cancelListener);
+
         } else {
             getNotificationController().showInfo(getString(R.string.toast_no_users_to_delete));
         }

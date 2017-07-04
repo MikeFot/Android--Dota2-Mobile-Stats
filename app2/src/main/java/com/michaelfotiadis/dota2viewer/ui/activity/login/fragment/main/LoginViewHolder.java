@@ -11,7 +11,7 @@ import com.michaelfotiadis.dota2viewer.ui.view.credentials.CredentialsInputLayou
 
 import butterknife.BindView;
 
-public class LoginViewHolder extends BaseViewHolder {
+class LoginViewHolder extends BaseViewHolder {
 
     @BindView(R.id.view_flipper)
     ViewFlipper mViewFlipper;
@@ -19,9 +19,10 @@ public class LoginViewHolder extends BaseViewHolder {
     CredentialsInputLayout mInputLayout;
     @BindView(R.id.button_login)
     Button mLoginButton;
+    @BindView(R.id.button_steam)
+    Button mSteamButton;
 
-
-    protected LoginViewHolder(final View view) {
+    LoginViewHolder(final View view) {
         super(view);
 
         getViewFlipper().setInAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_right_chrome));
@@ -29,15 +30,15 @@ public class LoginViewHolder extends BaseViewHolder {
 
     }
 
-    public ViewFlipper getViewFlipper() {
+    ViewFlipper getViewFlipper() {
         return mViewFlipper;
     }
 
-    public CredentialsInputLayout getInputLayout() {
+    CredentialsInputLayout getInputLayout() {
         return mInputLayout;
     }
 
-    public Button getLoginButton() {
+    Button getLoginButton() {
         return mLoginButton;
     }
 

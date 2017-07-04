@@ -52,6 +52,14 @@ import com.michaelfotiadis.dota2viewer.utils.TextUtils;
             }
         });
 
+        mViewHolder.mSteamButton.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(final View view) {
+                                                            mCallbacks.showSteamLogin(view);
+                                                        }
+                                                    }
+        );
+
     }
 
     protected void login(final String username) {
