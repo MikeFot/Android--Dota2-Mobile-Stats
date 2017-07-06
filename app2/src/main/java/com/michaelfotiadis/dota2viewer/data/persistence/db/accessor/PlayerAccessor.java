@@ -1,5 +1,6 @@
 package com.michaelfotiadis.dota2viewer.data.persistence.db.accessor;
 
+import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -30,6 +31,10 @@ public class PlayerAccessor extends Accessor {
 
     public void insert(final List<PlayerSummary> playerSummaries) {
         this.insert(playerSummaries, null);
+    }
+
+    public LiveData<List<PlayerEntity>> getASync() {
+        return getDb().getPlayerDao().getAll();
     }
 
     public List<PlayerEntity> getSync() {

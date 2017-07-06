@@ -8,7 +8,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:layout_margin="@dimen/margin_8dp"
+    android:layout_marginLeft="@dimen/margin_8dp"
+    android:layout_marginRight="@dimen/margin_8dp"
+    android:layout_marginTop="@dimen/margin_4dp"
+    android:layout_marginBottom="@dimen/margin_4dp"
     card_view:cardUseCompatPadding="true"
     card_view:contentPadding="@dimen/padding_8dp">
 
@@ -25,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_medium_large"
-            tools:text="Crystal MaidenCrystal MaidenCrystal MaidenCrystal Maiden"/>
+            tools:text="Bot the Great the best player in the world - HaxxorAwesome"/>
 
         <TextView
             android:id="@+id/text_id64"

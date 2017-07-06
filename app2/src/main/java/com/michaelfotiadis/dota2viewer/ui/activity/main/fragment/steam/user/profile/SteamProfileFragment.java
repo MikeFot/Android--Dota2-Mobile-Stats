@@ -1,5 +1,10 @@
 package com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.profile;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.OnLifecycleEvent;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
@@ -11,31 +16,29 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.michaelfotiadis.dota2viewer.R;
-import com.michaelfotiadis.dota2viewer.data.loader.JobScheduler;
-import com.michaelfotiadis.dota2viewer.data.persistence.db.AppDatabase;
-import com.michaelfotiadis.dota2viewer.event.steam.FetchedPlayersEvent;
-import com.michaelfotiadis.dota2viewer.event.steam.UserChangedEvent;
+import com.michaelfotiadis.dota2viewer.data.persistence.preference.UserPreferences;
 import com.michaelfotiadis.dota2viewer.injection.Injector;
 import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.result.BaseUserRecyclerFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.result.PlayerWrapper;
-import com.michaelfotiadis.dota2viewer.ui.core.base.error.errorpage.QuoteOnClickListenerWrapper;
+import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.profile.viewmodel.SteamProfilePayload;
+import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.profile.viewmodel.SteamProfileViewModel;
 import com.michaelfotiadis.dota2viewer.ui.core.base.fragment.BaseFragment;
 import com.michaelfotiadis.dota2viewer.ui.core.base.recyclerview.manager.State;
 import com.michaelfotiadis.dota2viewer.ui.core.dialog.alert.AlertDialogFactory;
+import com.michaelfotiadis.dota2viewer.utils.AppLog;
 import com.michaelfotiadis.dota2viewer.utils.TextUtils;
 import com.michaelfotiadis.steam.data.steam.users.user.PlayerSummary;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
 public class SteamProfileFragment extends BaseUserRecyclerFragment {
 
     @Inject
-    JobScheduler mJobScheduler;
-    @Inject
-    AppDatabase mAppDatabase;
+    UserPreferences mUserPreferences;
+
+    private SteamProfileViewModel mViewModel;
     private MenuItem mDeleteItem;
 
     @Override
@@ -44,25 +47,58 @@ public class SteamProfileFragment extends BaseUserRecyclerFragment {
     }
 
     @Override
-    protected void loadData() {
-        mRecyclerManager.clearError();
-        mRecyclerManager.updateUiState(State.PROGRESS);
-        if (TextUtils.isNotEmpty(getCurrentUserId())) {
-            mJobScheduler.startFetchPlayersJob(getCurrentUserId(), true);
-        } else {
-            if (mDeleteItem != null) {
-                mDeleteItem.setVisible(false);
+    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initRecyclerManager(view);
+
+        getLifecycle().addObserver(new LifecycleObserver() {
+            @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+            void onResume() {
+                EventBus.getDefault().register(mViewModel);
             }
-            final QuoteOnClickListenerWrapper listenerWrapper = new QuoteOnClickListenerWrapper(R.string.error_label_go_to_login, new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    getIntentDispatcher().openLoginActivity(v);
+
+            @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+            void onPause() {
+                EventBus.getDefault().unregister(mViewModel);
+            }
+        });
+
+
+        mViewModel.getProfile(getCurrentUserId()).observe(
+                this,
+                new Observer<SteamProfilePayload>() {
+                    @Override
+                    public void onChanged(@Nullable final SteamProfilePayload steamLibraryPayload) {
+                        AppLog.d("Received steam library payload " + steamLibraryPayload);
+                        if (TextUtils.isNotEmpty(getCurrentUserId())) {
+                            setResult(steamLibraryPayload);
+                        } else {
+                            showNoId();
+                        }
+                    }
+                });
+
+        mUserPreferences.getMutableLivePreference().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable final String userId) {
+                if (TextUtils.isNotEmpty(getCurrentUserId())) {
+                    loadData();
+                } else {
+                    showNoId();
                 }
-            });
+            }
+        });
+    }
 
-            mRecyclerManager.setError(getString(R.string.error_no_user), listenerWrapper);
+    @Override
+    protected void loadData() {
+        if (mViewModel != null) {
+            AppLog.d("Loading data for ID: " + getCurrentUserId());
+            mRecyclerManager.clearError();
+            mRecyclerManager.updateUiState(State.PROGRESS);
+            mViewModel.loadProfile(getCurrentUserId());
         }
-
     }
 
     @Override
@@ -75,6 +111,7 @@ public class SteamProfileFragment extends BaseUserRecyclerFragment {
     public void onAttach(final Context context) {
         Injector.getComponentStore().getAndroidAwareComponent().inject(this);
         super.onAttach(context);
+        mViewModel = ViewModelProviders.of(this).get(SteamProfileViewModel.class);
     }
 
     @Override
@@ -108,7 +145,7 @@ public class SteamProfileFragment extends BaseUserRecyclerFragment {
         final DialogInterface.OnClickListener okListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
-                mJobScheduler.startDeleteProfileJob(idToDelete);
+                mViewModel.deleteProfile(idToDelete);
                 dialog.dismiss();
             }
         };
@@ -132,25 +169,20 @@ public class SteamProfileFragment extends BaseUserRecyclerFragment {
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onUserChangedEvent(final UserChangedEvent event) {
-        loadData();
-    }
+    private void setResult(final SteamProfilePayload steamProfilePayload) {
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onDataLoadedEvent(final FetchedPlayersEvent event) {
-
-        if (event.getError() == null) {
+        if (steamProfilePayload.getError() == null) {
             mRecyclerManager.clearItems();
-            for (final PlayerSummary summary : event.getPlayers()) {
+            for (final PlayerSummary summary : steamProfilePayload.getPlayers()) {
                 mRecyclerManager.addItem(new PlayerWrapper(summary));
             }
             if (mDeleteItem != null) {
                 mDeleteItem.setVisible(true);
             }
         } else {
-            setRecyclerError(event.getError());
+            setRecyclerError(steamProfilePayload.getError());
         }
+
     }
 
     public static BaseFragment newInstance() {

@@ -8,6 +8,7 @@ import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.popular.Popula
 import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.result.PlayerPickerFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.web.WebViewFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.MainActivity;
+import com.michaelfotiadis.dota2viewer.ui.activity.main.PlayerListViewModel;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.econ.hero.heroes.DotaHeroesFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.econ.hero.stats.DotaHeroAttributesFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.econ.item.items.DotaItemsFragment;
@@ -16,7 +17,9 @@ import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.match.leag
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.match.live.DotaLiveGamesFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.match.overview.DotaMatchOverviewFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.library.SteamLibraryFragment;
+import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.library.viewmodel.SteamLibraryViewModel;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.profile.SteamProfileFragment;
+import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.profile.viewmodel.SteamProfileViewModel;
 import com.michaelfotiadis.dota2viewer.ui.activity.performance.fragment.calendar.CalendarFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.performance.fragment.hero.HeroStatsFragment;
 
@@ -66,4 +69,9 @@ public interface AndroidAwareComponent {
 
     void inject(PopularPlayersFragment popularPlayersFragment);
 
+    void inject(SteamLibraryViewModel steamLibraryViewModel);
+
+    void inject(PlayerListViewModel playerListViewModel);
+
+    void inject(SteamProfileViewModel steamProfileViewModel);
 }

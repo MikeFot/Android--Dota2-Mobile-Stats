@@ -4,7 +4,6 @@ import com.michaelfotiadis.dota2viewer.data.persistence.db.AppDatabase;
 
 public class DbAccessor {
 
-
     private final PlayerAccessor mPlayerAccessor;
     private final DotaHeroAccessor mDotaHeroAccessor;
 

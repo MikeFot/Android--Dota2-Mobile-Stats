@@ -6,7 +6,7 @@ import com.michaelfotiadis.dota2viewer.data.loader.jobs.BaseJob;
 import com.michaelfotiadis.dota2viewer.data.persistence.db.AppDatabase;
 import com.michaelfotiadis.dota2viewer.data.persistence.db.model.PlayerEntity;
 import com.michaelfotiadis.dota2viewer.data.persistence.preference.UserPreferences;
-import com.michaelfotiadis.dota2viewer.event.steam.UserDeletedEvent;
+import com.michaelfotiadis.dota2viewer.event.steam.UserChangedEvent;
 import com.michaelfotiadis.dota2viewer.utils.AppLog;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public class DeleteProfileJob extends BaseJob {
         }
         AppLog.d("Switched to next User id: " + nextId);
         mUserPreferences.writeCurrentUserId(nextId);
-        postEvent(new UserDeletedEvent(remainingPlayers, nextId));
+        postEvent(new UserChangedEvent(nextId));
         postJobFinished();
 
     }

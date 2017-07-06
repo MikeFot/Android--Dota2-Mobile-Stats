@@ -50,7 +50,7 @@ public class FetchLibraryJob extends BaseJob {
 
     @Override
     public void onAdded() {
-        AppLog.d(FetchLibraryJob.class.getSimpleName() + " job added on " + System.currentTimeMillis());
+        AppLog.d(FetchLibraryJob.class.getSimpleName() + " job added on " + System.currentTimeMillis() + " for id " + mSteamId);
     }
 
     @Override

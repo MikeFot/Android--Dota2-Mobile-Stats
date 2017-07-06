@@ -21,10 +21,19 @@ public class UserPreferences extends PreferenceHandler {
     }
 
     public void writeCurrentUserId(final String id) {
+
+        if (id.equals(getCurrentUserId())) {
+            return;
+        }
+
         final SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putString(KEY_USER_ID, id);
         editor.apply();
         AppLog.d("User id updated to " + id);
+    }
+
+    public LiveSharedPreference<String> getMutableLivePreference() {
+        return new LiveSharedPreference<>(KEY_USER_ID, getSharedPreferences());
     }
 
     public void registerOnChangedListener(@NonNull final OnUserChangedListener listener) {

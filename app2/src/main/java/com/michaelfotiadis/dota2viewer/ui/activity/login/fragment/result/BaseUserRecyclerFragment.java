@@ -16,6 +16,7 @@ import com.michaelfotiadis.dota2viewer.ui.core.base.recyclerview.manager.Recycle
 import com.michaelfotiadis.dota2viewer.ui.core.base.viewmanagement.SimpleUiStateKeeper;
 import com.michaelfotiadis.dota2viewer.ui.core.base.viewmanagement.UiStateKeeper;
 import com.michaelfotiadis.dota2viewer.ui.image.ImageLoader;
+import com.michaelfotiadis.dota2viewer.utils.TextUtils;
 
 import javax.inject.Inject;
 
@@ -46,14 +47,6 @@ public abstract class BaseUserRecyclerFragment extends BaseRecyclerFragment<Play
     }
 
     @Override
-    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getEventLifecycleListener().enable();
-        initRecyclerManager(view);
-        loadData();
-    }
-
-    @Override
     protected void initRecyclerManager(final View view) {
         final UiStateKeeper uiStateKeeper = new SimpleUiStateKeeper(view, mRecyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -66,6 +59,12 @@ public abstract class BaseUserRecyclerFragment extends BaseRecyclerFragment<Play
                 .setAnimator(new MatchesItemAnimator())
                 .setEmptyMessage("Nothing to see here")
                 .build();
+
+        if (TextUtils.isEmpty(getCurrentUserId())) {
+            showNoId();
+        } else {
+            mRecyclerManager.updateUiState();
+        }
     }
 
 }

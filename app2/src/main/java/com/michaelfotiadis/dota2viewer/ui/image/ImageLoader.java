@@ -10,6 +10,8 @@ import com.michaelfotiadis.dota2viewer.utils.AppLog;
 import com.michaelfotiadis.dota2viewer.utils.TextUtils;
 import com.michaelfotiadis.steam.provider.image.ImageProvider;
 import com.michaelfotiadis.steam.provider.image.Size;
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.iconics.IconicsDrawable;
 import com.squareup.picasso.Picasso;
 
 import uk.co.alt236.resourcemirror.Mirror;
@@ -44,10 +46,15 @@ public class ImageLoader {
     }
 
     public void loadIntoImageView(final ImageView view, final String url) {
-        if (TextUtils.isEmpty(view.getContentDescription())) {
-            view.setContentDescription(url);
+
+        if (TextUtils.isNotEmpty(url)) {
+            if (TextUtils.isEmpty(view.getContentDescription())) {
+                view.setContentDescription(url);
+            }
+            mPicasso.load(url).error(R.drawable.ic_default).into(view);
+        } else {
+            view.setImageDrawable(new IconicsDrawable(view.getContext(), FontAwesome.Icon.faw_steam).mutate());
         }
-        mPicasso.load(url).error(R.drawable.ic_default).into(view);
     }
 
     public void loadIntoImageView(final ImageView view, final Uri uri) {

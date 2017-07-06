@@ -2,6 +2,7 @@ package com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.result;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.michaelfotiadis.dota2viewer.R;
@@ -37,6 +38,14 @@ public class PlayerPickerFragment extends BaseUserRecyclerFragment implements On
     public void onAttach(final Context context) {
         Injector.getComponentStore().getAndroidAwareComponent().inject(this);
         super.onAttach(context);
+    }
+
+    @Override
+    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getEventLifecycleListener().enable();
+        initRecyclerManager(view);
+        loadData();
     }
 
     @Override

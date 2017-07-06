@@ -48,45 +48,6 @@ public abstract class BaseRecyclerFragment<D> extends BaseFragment {
         return view;
     }
 
-    protected void setRecyclerError(final Error error) {
-
-        final UiDataLoadError uiDataLoadError = UiDataLoadErrorFactory.createError(getContext(), error);
-        if (uiDataLoadError.isRecoverable()) {
-
-            if (uiDataLoadError.getKind() == UiDataLoadError.ErrorKind.NO_NETWORK) {
-                showNoNetworkMessage();
-            }
-            mRecyclerManager.setError(uiDataLoadError.getMessage(), new QuoteOnClickListenerWrapper(R.string.label_try_again, new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    loadData();
-                }
-            }));
-
-        } else {
-            mRecyclerManager.setError(uiDataLoadError.getMessage());
-        }
-
-    }
-
-    protected void showNoUserError() {
-        final QuoteOnClickListenerWrapper listenerWrapper = new QuoteOnClickListenerWrapper(R.string.error_label_go_to_login, new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                getIntentDispatcher().openLoginActivity(v);
-            }
-        });
-        mRecyclerManager.setError(getString(R.string.error_no_user), listenerWrapper);
-    }
-
-    protected abstract void initRecyclerManager(View view);
-
-    protected abstract void loadData();
-
-    private boolean isSearchable() {
-        return this instanceof Searchable;
-    }
-
     @Override
     public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
 
@@ -136,6 +97,57 @@ public abstract class BaseRecyclerFragment<D> extends BaseFragment {
 
 
     }
+
+    protected void setRecyclerError(final Error error) {
+
+        final UiDataLoadError uiDataLoadError = UiDataLoadErrorFactory.createError(getContext(), error);
+        if (uiDataLoadError.isRecoverable()) {
+
+            if (uiDataLoadError.getKind() == UiDataLoadError.ErrorKind.NO_NETWORK) {
+                showNoNetworkMessage();
+            }
+            mRecyclerManager.setError(uiDataLoadError.getMessage(), new QuoteOnClickListenerWrapper(R.string.label_try_again, new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    loadData();
+                }
+            }));
+
+        } else {
+            mRecyclerManager.setError(uiDataLoadError.getMessage());
+        }
+
+    }
+
+    protected void showNoUserError() {
+        final QuoteOnClickListenerWrapper listenerWrapper = new QuoteOnClickListenerWrapper(R.string.error_label_go_to_login, new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                getIntentDispatcher().openLoginActivity(v);
+            }
+        });
+        mRecyclerManager.setError(getString(R.string.error_no_user), listenerWrapper);
+    }
+
+    protected void showNoId() {
+        final QuoteOnClickListenerWrapper listenerWrapper = new QuoteOnClickListenerWrapper(R.string.error_label_go_to_login, new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                getIntentDispatcher().openLoginActivity(v);
+            }
+        });
+
+        mRecyclerManager.setError(getString(R.string.error_no_user), listenerWrapper);
+    }
+
+    protected abstract void initRecyclerManager(View view);
+
+    protected abstract void loadData();
+
+    private boolean isSearchable() {
+        return this instanceof Searchable;
+    }
+
 
     public static class DefaultOnActionExpandListener implements MenuItemCompat.OnActionExpandListener {
         @Override

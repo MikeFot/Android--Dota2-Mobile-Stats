@@ -3,6 +3,8 @@ package com.michaelfotiadis.dota2viewer;
 import android.app.Application;
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
+import android.arch.lifecycle.Observer;
+import android.support.annotation.Nullable;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
@@ -58,8 +60,14 @@ public class Dota2Application extends Application implements LifecycleRegistryOw
 
         DatabaseCreator.getInstance().createDb(this);
 
-
-        mUserPreferences.registerOnChangedListener(new OnUserChangedListener());
+        //noinspection AnonymousInnerClassMayBeStatic
+        mUserPreferences.getMutableLivePreference().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable final String id) {
+                AppLog.d("Posting user changed event");
+                EventBus.getDefault().post(new UserChangedEvent(id));
+            }
+        });
 
     }
 
@@ -78,13 +86,6 @@ public class Dota2Application extends Application implements LifecycleRegistryOw
     @Override
     public LifecycleRegistry getLifecycle() {
         return mLifecycleRegistry;
-    }
-
-    private static class OnUserChangedListener implements UserPreferences.OnUserChangedListener {
-        @Override
-        public void onNewUser(final String username) {
-            EventBus.getDefault().post(new UserChangedEvent(username));
-        }
     }
 
     private class VisibilityChangeListener implements ActivityLifeCycleMonitor.OnVisibilityChangeListener {
