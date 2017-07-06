@@ -1,5 +1,8 @@
 <resources>
 
+    <string name="title_performance">Performance</string>
+    <string name="title_last_matches">Last %1$d matches</string>
+
     <!--Drawer-->
     <string name="drawer_title_steam">Steam</string>
     <string name="drawer_title_user">User</string>
@@ -130,6 +133,6 @@
     <string name="attr_attack_point">Attack Point:</string>
     <string name="attr_attack_backswing">Attack Backswing:</string>
     <string name="attr_vision_day_night">Vision Day / Night:</string>
-    <string name="title_performance">Performance</string>
+
 
 </resources>

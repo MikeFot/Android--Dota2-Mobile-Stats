@@ -2,6 +2,7 @@ package com.michaelfotiadis.dota2viewer.ui.activity.performance.fragment.calenda
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -117,7 +118,7 @@ public class CalendarFragment extends BaseFragment {
             @Override
             public void run() {
 
-                android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
                 final List<DotaMatchDetailsEntity> entities = mAppDatabase.getDotaMatchDetailsDao().getAllSync();
 
@@ -141,6 +142,7 @@ public class CalendarFragment extends BaseFragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        getActivity().setTitle(getString(R.string.title_last_matches, matchDetailsList.size()));
                         mAdapter.setStats(stats);
                     }
                 });

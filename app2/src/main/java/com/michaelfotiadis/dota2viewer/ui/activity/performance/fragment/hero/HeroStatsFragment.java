@@ -189,6 +189,7 @@ public class HeroStatsFragment extends BaseRecyclerFragment<HeroStatistics> {
 
                 final List<MatchDetails> matches = DotaMatchDetailsEntity.fromEntities(
                         mAppDatabase.getDotaMatchDetailsDao().getAllSync());
+
                 final List<Hero> heroes = DotaHeroEntity.fromEntities(
                         mAppDatabase.getDotaHeroDao().getAllSync());
 
@@ -205,6 +206,7 @@ public class HeroStatsFragment extends BaseRecyclerFragment<HeroStatistics> {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        getActivity().setTitle(getString(R.string.title_last_matches, matches.size()));
                         mData = heroStatsList;
                         mRecyclerManager.setItems(heroStatsList);
                     }
