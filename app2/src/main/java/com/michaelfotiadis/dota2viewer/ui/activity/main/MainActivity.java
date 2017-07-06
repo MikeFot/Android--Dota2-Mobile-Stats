@@ -233,7 +233,7 @@ public class MainActivity extends BaseActivity {
 
                 if (!textId.equals(getCurrentUserId())) {
                     AppLog.d("User changed to id " + textId);
-                    new UserPreferences(MainActivity.this).writeCurrentUserId(textId);
+                    mUserPreferences.writeCurrentUserId(textId);
                     closeDrawer();
                 }
             }
@@ -243,7 +243,7 @@ public class MainActivity extends BaseActivity {
                 final DialogInterface.OnClickListener okListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialog, final int which) {
-                        mJobScheduler.startDeleteProfileJob(String.valueOf(identifier));
+                        mViewModel.deleteProfile(String.valueOf(identifier));
                         dialog.dismiss();
                     }
                 };
@@ -315,7 +315,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void closeDrawer() {
-        if (mDrawer != null) {
+        if (mDrawer != null && mDrawer.isDrawerOpen()) {
             mDrawer.closeDrawer();
         }
     }
