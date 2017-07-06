@@ -21,14 +21,9 @@ import com.michaelfotiadis.dota2viewer.ui.activity.performance.fragment.hero.Her
 import com.michaelfotiadis.dota2viewer.ui.core.base.error.errorpage.QuoteOnClickListenerWrapper;
 import com.michaelfotiadis.dota2viewer.ui.core.base.recyclerview.manager.RecyclerManager;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public abstract class BaseRecyclerFragment<D> extends BaseFragment {
-
-    @BindView(R.id.recycler_view)
-    protected RecyclerView mRecyclerView;
-    protected RecyclerManager<D> mRecyclerManager;
 
     @Override
     public void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -37,6 +32,11 @@ public abstract class BaseRecyclerFragment<D> extends BaseFragment {
             setHasOptionsMenu(true);
         }
     }
+
+
+    protected abstract RecyclerManager<D> getRecyclerManager();
+
+    protected abstract RecyclerView getRecyclerView();
 
     @Nullable
     @Override
@@ -69,7 +69,7 @@ public abstract class BaseRecyclerFragment<D> extends BaseFragment {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(final String query) {
-                    mRecyclerView.getItemAnimator().isRunning(new RecyclerView.ItemAnimator.ItemAnimatorFinishedListener() {
+                    getRecyclerView().getItemAnimator().isRunning(new RecyclerView.ItemAnimator.ItemAnimatorFinishedListener() {
                         @Override
                         public void onAnimationsFinished() {
                             ((Searchable) BaseRecyclerFragment.this).submitQuery(query);
@@ -81,7 +81,7 @@ public abstract class BaseRecyclerFragment<D> extends BaseFragment {
 
                 @Override
                 public boolean onQueryTextChange(final String searchText) {
-                    mRecyclerView.getItemAnimator().isRunning(new RecyclerView.ItemAnimator.ItemAnimatorFinishedListener() {
+                    getRecyclerView().getItemAnimator().isRunning(new RecyclerView.ItemAnimator.ItemAnimatorFinishedListener() {
                         @Override
                         public void onAnimationsFinished() {
                             ((Searchable) BaseRecyclerFragment.this).submitQuery(searchText);
@@ -106,7 +106,7 @@ public abstract class BaseRecyclerFragment<D> extends BaseFragment {
             if (uiDataLoadError.getKind() == UiDataLoadError.ErrorKind.NO_NETWORK) {
                 showNoNetworkMessage();
             }
-            mRecyclerManager.setError(uiDataLoadError.getMessage(), new QuoteOnClickListenerWrapper(R.string.label_try_again, new View.OnClickListener() {
+            getRecyclerManager().setError(uiDataLoadError.getMessage(), new QuoteOnClickListenerWrapper(R.string.label_try_again, new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
                     loadData();
@@ -114,7 +114,7 @@ public abstract class BaseRecyclerFragment<D> extends BaseFragment {
             }));
 
         } else {
-            mRecyclerManager.setError(uiDataLoadError.getMessage());
+            getRecyclerManager().setError(uiDataLoadError.getMessage());
         }
 
     }
@@ -126,18 +126,7 @@ public abstract class BaseRecyclerFragment<D> extends BaseFragment {
                 getIntentDispatcher().openLoginActivity(v);
             }
         });
-        mRecyclerManager.setError(getString(R.string.error_no_user), listenerWrapper);
-    }
-
-    protected void showNoId() {
-        final QuoteOnClickListenerWrapper listenerWrapper = new QuoteOnClickListenerWrapper(R.string.error_label_go_to_login, new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                getIntentDispatcher().openLoginActivity(v);
-            }
-        });
-
-        mRecyclerManager.setError(getString(R.string.error_no_user), listenerWrapper);
+        getRecyclerManager().setError(getString(R.string.error_no_user), listenerWrapper);
     }
 
     protected abstract void initRecyclerManager(View view);

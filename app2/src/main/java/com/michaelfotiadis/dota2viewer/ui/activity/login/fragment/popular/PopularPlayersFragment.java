@@ -43,13 +43,15 @@ public class PopularPlayersFragment extends BaseRecyclerFragment<PopularPlayer> 
     private final List<PopularPlayer> mData = new ArrayList<>();
 
     @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+    protected RecyclerView mRecyclerView;
+    protected RecyclerManager<PopularPlayer> mRecyclerManager;
     @Inject
     JobScheduler mJobScheduler;
 
-
-    public static Fragment newInstance() {
-        return new PopularPlayersFragment();
+    @Override
+    public void onAttach(final Context context) {
+        Injector.getComponentStore().getAndroidAwareComponent().inject(this);
+        super.onAttach(context);
     }
 
     @Override
@@ -61,9 +63,13 @@ public class PopularPlayersFragment extends BaseRecyclerFragment<PopularPlayer> 
     }
 
     @Override
-    public void onAttach(final Context context) {
-        Injector.getComponentStore().getAndroidAwareComponent().inject(this);
-        super.onAttach(context);
+    protected RecyclerManager<PopularPlayer> getRecyclerManager() {
+        return mRecyclerManager;
+    }
+
+    @Override
+    protected RecyclerView getRecyclerView() {
+        return mRecyclerView;
     }
 
     @Override
@@ -150,5 +156,9 @@ public class PopularPlayersFragment extends BaseRecyclerFragment<PopularPlayer> 
             mRecyclerManager.setItems(mData);
         }
 
+    }
+
+    public static Fragment newInstance() {
+        return new PopularPlayersFragment();
     }
 }

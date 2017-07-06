@@ -5,8 +5,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.michaelfotiadis.dota2viewer.R;
 import com.michaelfotiadis.dota2viewer.data.loader.JobScheduler;
 import com.michaelfotiadis.dota2viewer.event.dota.league.FetchedLeagueListingsEvent;
 import com.michaelfotiadis.dota2viewer.injection.Injector;
@@ -33,8 +35,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+
 public class DotaLeagueListingsFragment extends BaseRecyclerFragment<League> implements OnItemSelectedListener<League>, Searchable {
 
+    @BindView(R.id.recycler_view)
+    protected RecyclerView mRecyclerView;
+    protected RecyclerManager<League> mRecyclerManager;
     @Inject
     JobScheduler mJobScheduler;
     private LeaguesRecyclerContentUpdater mContentUpdater;
@@ -74,6 +81,16 @@ public class DotaLeagueListingsFragment extends BaseRecyclerFragment<League> imp
         } else {
             setRecyclerError(event.getError());
         }
+    }
+
+    @Override
+    protected RecyclerManager<League> getRecyclerManager() {
+        return mRecyclerManager;
+    }
+
+    @Override
+    protected RecyclerView getRecyclerView() {
+        return mRecyclerView;
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,9 +49,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+
 public class HeroStatsFragment extends BaseRecyclerFragment<HeroStatistics> {
 
-
+    @BindView(R.id.recycler_view)
+    protected RecyclerView mRecyclerView;
+    protected RecyclerManager<HeroStatistics> mRecyclerManager;
     @Inject
     AppDatabase mAppDatabase;
     @Inject
@@ -68,37 +73,13 @@ public class HeroStatsFragment extends BaseRecyclerFragment<HeroStatistics> {
     }
 
     @Override
-    public void onAttach(final Context context) {
-        Injector.getComponentStore().getAndroidAwareComponent().inject(this);
-        super.onAttach(context);
+    protected RecyclerManager<HeroStatistics> getRecyclerManager() {
+        return mRecyclerManager;
     }
 
     @Override
-    protected void initRecyclerManager(final View view) {
-        final UiStateKeeper uiStateKeeper = new SimpleUiStateKeeper(view, mRecyclerView);
-
-        mRecyclerView.setHasFixedSize(false);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
-        final HeroStatsRecyclerAdapter adapter = new HeroStatsRecyclerAdapter(getActivity(), mImageLoader);
-        mRecyclerManager = new RecyclerManager.Builder<>(adapter)
-                .setRecycler(mRecyclerView)
-                .setStateKeeper(uiStateKeeper)
-                .setEmptyMessage("Nothing to see here")
-                .build();
-
-        mRecyclerManager.updateUiState();
-    }
-
-    @Override
-    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getEventLifecycleListener().enable();
-
-        initRecyclerManager(view);
-
-        loadData();
+    protected RecyclerView getRecyclerView() {
+        return mRecyclerView;
     }
 
     @Override
@@ -135,13 +116,22 @@ public class HeroStatsFragment extends BaseRecyclerFragment<HeroStatistics> {
         MenuItemCompat.setOnActionExpandListener(searchMenu, new DefaultOnActionExpandListener());
     }
 
-    private void submitQuery(final String query) {
-        if (TextUtils.isEmpty(query)) {
-            mRecyclerManager.setItems(mData);
-        } else {
-            mRecyclerManager.setItems(SearchFilterUtils.getFilteredHeroStatistics(mData, query));
-        }
+    @Override
+    protected void initRecyclerManager(final View view) {
+        final UiStateKeeper uiStateKeeper = new SimpleUiStateKeeper(view, mRecyclerView);
 
+        mRecyclerView.setHasFixedSize(false);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+        final HeroStatsRecyclerAdapter adapter = new HeroStatsRecyclerAdapter(getActivity(), mImageLoader);
+        mRecyclerManager = new RecyclerManager.Builder<>(adapter)
+                .setRecycler(mRecyclerView)
+                .setStateKeeper(uiStateKeeper)
+                .setEmptyMessage("Nothing to see here")
+                .build();
+
+        mRecyclerManager.updateUiState();
     }
 
     @Override
@@ -154,6 +144,30 @@ public class HeroStatsFragment extends BaseRecyclerFragment<HeroStatistics> {
         }
     }
 
+    @Override
+    public void onAttach(final Context context) {
+        Injector.getComponentStore().getAndroidAwareComponent().inject(this);
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getEventLifecycleListener().enable();
+
+        initRecyclerManager(view);
+
+        loadData();
+    }
+
+    private void submitQuery(final String query) {
+        if (TextUtils.isEmpty(query)) {
+            mRecyclerManager.setItems(mData);
+        } else {
+            mRecyclerManager.setItems(SearchFilterUtils.getFilteredHeroStatistics(mData, query));
+        }
+
+    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDataLoadedEvent(final FetchedDotaHeroPatchAttributesEvent event) {

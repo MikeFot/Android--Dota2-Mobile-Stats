@@ -6,8 +6,8 @@ import com.michaelfotiadis.dota2viewer.data.loader.jobs.BaseJob;
 import com.michaelfotiadis.dota2viewer.data.persistence.db.AppDatabase;
 import com.michaelfotiadis.dota2viewer.data.persistence.db.model.PlayerEntity;
 import com.michaelfotiadis.dota2viewer.data.persistence.preference.UserPreferences;
-import com.michaelfotiadis.dota2viewer.event.steam.UserChangedEvent;
 import com.michaelfotiadis.dota2viewer.utils.AppLog;
+import com.michaelfotiadis.dota2viewer.utils.TextUtils;
 
 import java.util.List;
 
@@ -35,16 +35,23 @@ public class DeleteProfileJob extends BaseJob {
     public void onRun() throws Throwable {
 
         mAppDatabase.getPlayerDao().delete(mSteamId64);
-        final List<PlayerEntity> remainingPlayers = mAppDatabase.getPlayerDao().getAllSync();
-        final String nextId;
-        if (remainingPlayers.isEmpty()) {
-            nextId = null;
-        } else {
-            nextId = remainingPlayers.get(0) != null ? remainingPlayers.get(0).getId() : null;
+
+        final String currentId = mUserPreferences.getCurrentUserId();
+        if (TextUtils.isNotEmpty(currentId)) {
+            if (currentId.equals(mSteamId64)) {
+                // we need to get rid of the current ID
+                final List<PlayerEntity> remainingPlayers = mAppDatabase.getPlayerDao().getAllSync();
+                final String nextId;
+                if (remainingPlayers.isEmpty()) {
+                    nextId = null;
+                } else {
+                    nextId = remainingPlayers.get(0) != null ? remainingPlayers.get(0).getId() : null;
+                }
+                AppLog.d("Switched to next User id: " + nextId);
+                mUserPreferences.writeCurrentUserId(nextId);
+            }
         }
-        AppLog.d("Switched to next User id: " + nextId);
-        mUserPreferences.writeCurrentUserId(nextId);
-        postEvent(new UserChangedEvent(nextId));
+
         postJobFinished();
 
     }

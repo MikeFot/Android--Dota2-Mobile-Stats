@@ -108,6 +108,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+
         mJobScheduler.startFetchDotaHeroesJob();
         mJobScheduler.startFetchDotaItemsJob();
 

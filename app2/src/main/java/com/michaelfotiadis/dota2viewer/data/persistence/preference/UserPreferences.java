@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import com.michaelfotiadis.dota2viewer.utils.AppLog;
+import com.michaelfotiadis.dota2viewer.utils.TextUtils;
 
 public class UserPreferences extends PreferenceHandler {
 
@@ -22,7 +23,9 @@ public class UserPreferences extends PreferenceHandler {
 
     public void writeCurrentUserId(final String id) {
 
-        if (id.equals(getCurrentUserId())) {
+        if (TextUtils.isEmpty(getCurrentUserId()) && TextUtils.isEmpty(id)) {
+            return;
+        } else if (TextUtils.isNotEmpty(getCurrentUserId()) && TextUtils.isNotEmpty(id) && getCurrentUserId().equals(id)) {
             return;
         }
 

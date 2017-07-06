@@ -16,14 +16,9 @@ import com.michaelfotiadis.dota2viewer.R;
 import com.michaelfotiadis.dota2viewer.ui.core.base.fragment.BaseFragment;
 import com.michaelfotiadis.dota2viewer.ui.core.toast.AppToast;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public abstract class BaseBottomNavFragment extends BaseFragment {
-
-    @BindView(R.id.navigation)
-    protected BottomNavigationView mNavigationView;
-
 
     protected static final String NESTED_FRAGMENT_TAG = "nested_fragment_tag";
     protected static final int CONTENT_ID = R.id.nested_content;
@@ -39,11 +34,13 @@ public abstract class BaseBottomNavFragment extends BaseFragment {
 
     }
 
+    protected abstract BottomNavigationView getNavigationView();
+
     @Override
     public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mNavigationView.setOnNavigationItemSelectedListener(
+        getNavigationView().setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
 
                     @Override
@@ -62,7 +59,7 @@ public abstract class BaseBottomNavFragment extends BaseFragment {
                 });
 
         if (savedInstanceState == null) {
-            mNavigationView.setSelectedItemId(getFirstMenuId());
+            getNavigationView().setSelectedItemId(getFirstMenuId());
         }
     }
 
@@ -79,7 +76,7 @@ public abstract class BaseBottomNavFragment extends BaseFragment {
     }
 
     protected void refreshCurrentPage() {
-        mNavigationView.setSelectedItemId(mNavigationView.getSelectedItemId());
+        getNavigationView().setSelectedItemId(getNavigationView().getSelectedItemId());
     }
 
     @LayoutRes

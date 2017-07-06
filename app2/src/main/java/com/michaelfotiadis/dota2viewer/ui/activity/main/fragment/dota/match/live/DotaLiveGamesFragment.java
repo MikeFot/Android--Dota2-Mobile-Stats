@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.michaelfotiadis.dota2viewer.R;
 import com.michaelfotiadis.dota2viewer.data.loader.JobScheduler;
 import com.michaelfotiadis.dota2viewer.data.persistence.db.AppDatabase;
 import com.michaelfotiadis.dota2viewer.data.persistence.db.model.DotaHeroEntity;
@@ -42,8 +44,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+
 public class DotaLiveGamesFragment extends BaseRecyclerFragment<LiveGame> implements OnItemSelectedListener<LiveGame>, Searchable {
 
+    @BindView(R.id.recycler_view)
+    protected RecyclerView mRecyclerView;
+    protected RecyclerManager<LiveGame> mRecyclerManager;
     @Inject
     JobScheduler mJobScheduler;
     @Inject
@@ -125,6 +132,16 @@ public class DotaLiveGamesFragment extends BaseRecyclerFragment<LiveGame> implem
         } else {
             setRecyclerError(event.getError());
         }
+    }
+
+    @Override
+    protected RecyclerManager<LiveGame> getRecyclerManager() {
+        return mRecyclerManager;
+    }
+
+    @Override
+    protected RecyclerView getRecyclerView() {
+        return mRecyclerView;
     }
 
     @Override

@@ -49,15 +49,14 @@ import butterknife.BindView;
 
 public class SteamLibraryFragment extends BaseRecyclerFragment<Game> implements OnItemSelectedListener<Game>, Searchable {
 
-
     @BindView(R.id.recycler_view)
     protected RecyclerView mRecyclerView;
+    protected RecyclerManager<Game> mRecyclerManager;
     @Inject
     ImageLoader mImageLoader;
     @Inject
     UserPreferences mUserPreferences;
 
-    private RecyclerManager<Game> mRecyclerManager;
     private SteamLibraryViewModel mViewModel;
 
     @Override
@@ -105,11 +104,7 @@ public class SteamLibraryFragment extends BaseRecyclerFragment<Game> implements 
                     @Override
                     public void onChanged(@Nullable final SteamLibraryPayload steamLibraryPayload) {
                         AppLog.d("Received steam library payload " + steamLibraryPayload);
-                        if (TextUtils.isNotEmpty(getCurrentUserId())) {
-                            setResult(steamLibraryPayload);
-                        } else {
-                            showNoId();
-                        }
+                        setResult(steamLibraryPayload);
                     }
                 });
 
@@ -117,15 +112,20 @@ public class SteamLibraryFragment extends BaseRecyclerFragment<Game> implements 
             @Override
             public void onChanged(@Nullable final String userId) {
                 if (mViewModel != null) {
-                    if (TextUtils.isNotEmpty(getCurrentUserId())) {
-                        loadData();
-                    } else {
-                        showNoId();
-                    }
-
+                    loadData();
                 }
             }
         });
+    }
+
+    @Override
+    protected RecyclerManager<Game> getRecyclerManager() {
+        return mRecyclerManager;
+    }
+
+    @Override
+    protected RecyclerView getRecyclerView() {
+        return mRecyclerView;
     }
 
     @Override
@@ -155,50 +155,53 @@ public class SteamLibraryFragment extends BaseRecyclerFragment<Game> implements 
     @Override
     protected void loadData() {
 
-        if (mViewModel != null) {
+        if (mViewModel != null && TextUtils.isNotEmpty(getCurrentUserId())) {
             mRecyclerManager.clearError();
             mRecyclerManager.updateUiState(State.PROGRESS);
             mViewModel.loadGames(getCurrentUserId());
+        } else {
+            showNoId();
         }
 
     }
 
 
     private void setResult(final SteamLibraryPayload payload) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (payload.getError() == null) {
 
-                    final List<Game> games = new ArrayList<>(payload.getGames());
-                    //noinspection AnonymousInnerClassMayBeStatic
-                    Collections.sort(games, new Comparator<Game>() {
-                        @Override
-                        public int compare(final Game o1, final Game o2) {
-                            return o2.getPlaytimeForever() - (o1.getPlaytimeForever());
-                        }
-                    });
+        if (TextUtils.isEmpty(getCurrentUserId())) {
+            showNoId();
+            return;
+        }
 
-                    mRecyclerManager.setItems(games);
-                } else {
-                    final UiDataLoadError uiDataLoadError = UiDataLoadErrorFactory.createError(getContext(), payload.getError());
+        if (payload.getError() == null) {
 
-                    if (uiDataLoadError.getKind() == UiDataLoadError.ErrorKind.NO_DATA) {
-                        mRecyclerManager.setError(
-                                getString(R.string.error_reason_no_games),
-                                new QuoteOnClickListenerWrapper(R.string.label_try_again, new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(final View v) {
-                                        loadData();
-                                    }
-                                }));
-                    } else {
-                        setRecyclerError(payload.getError());
-                    }
+            final List<Game> games = new ArrayList<>(payload.getGames());
+            //noinspection AnonymousInnerClassMayBeStatic
+            Collections.sort(games, new Comparator<Game>() {
+                @Override
+                public int compare(final Game o1, final Game o2) {
+                    return o2.getPlaytimeForever() - (o1.getPlaytimeForever());
                 }
-                mRecyclerManager.updateUiState();
+            });
+
+            mRecyclerManager.setItems(games);
+        } else {
+            final UiDataLoadError uiDataLoadError = UiDataLoadErrorFactory.createError(getContext(), payload.getError());
+
+            if (uiDataLoadError.getKind() == UiDataLoadError.ErrorKind.NO_DATA) {
+                mRecyclerManager.setError(
+                        getString(R.string.error_reason_no_games),
+                        new QuoteOnClickListenerWrapper(R.string.label_try_again, new View.OnClickListener() {
+                            @Override
+                            public void onClick(final View v) {
+                                loadData();
+                            }
+                        }));
+            } else {
+                setRecyclerError(payload.getError());
             }
-        });
+        }
+        mRecyclerManager.updateUiState();
 
     }
 
@@ -207,5 +210,17 @@ public class SteamLibraryFragment extends BaseRecyclerFragment<Game> implements 
         return new SteamLibraryFragment();
     }
 
+
+    protected void showNoId() {
+        final QuoteOnClickListenerWrapper listenerWrapper = new QuoteOnClickListenerWrapper(R.string.error_label_go_to_login, new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                getIntentDispatcher().openLoginActivity(v);
+            }
+        });
+
+        mRecyclerManager.setError(getString(R.string.error_no_user), listenerWrapper);
+        mRecyclerManager.updateUiState();
+    }
 
 }

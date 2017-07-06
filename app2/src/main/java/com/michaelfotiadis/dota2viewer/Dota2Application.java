@@ -65,6 +65,7 @@ public class Dota2Application extends Application implements LifecycleRegistryOw
             @Override
             public void onChanged(@Nullable final String id) {
                 AppLog.d("Posting user changed event");
+                mJobScheduler.clear();
                 EventBus.getDefault().post(new UserChangedEvent(id));
             }
         });

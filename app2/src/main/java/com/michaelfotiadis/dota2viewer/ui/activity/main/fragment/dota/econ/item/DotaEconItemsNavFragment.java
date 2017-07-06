@@ -1,6 +1,7 @@
 package com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.econ.item;
 
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 
 import com.michaelfotiadis.dota2viewer.R;
@@ -8,7 +9,18 @@ import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.BaseBottomNavFr
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.econ.item.items.DotaItemsFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.econ.item.rarities.DotaRaritiesFragment;
 
+import butterknife.BindView;
+
 public class DotaEconItemsNavFragment extends BaseBottomNavFragment {
+
+
+    @BindView(R.id.navigation)
+    protected BottomNavigationView mNavigationView;
+
+    @Override
+    protected BottomNavigationView getNavigationView() {
+        return mNavigationView;
+    }
 
     @Override
     protected int getLayoutId() {

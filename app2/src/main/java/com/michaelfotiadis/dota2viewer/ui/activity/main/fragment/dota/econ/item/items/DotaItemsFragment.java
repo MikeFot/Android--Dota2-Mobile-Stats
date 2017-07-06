@@ -4,9 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.michaelfotiadis.dota2viewer.BuildConfig;
+import com.michaelfotiadis.dota2viewer.R;
 import com.michaelfotiadis.dota2viewer.data.loader.JobScheduler;
 import com.michaelfotiadis.dota2viewer.event.dota.econ.FetchedDotaItemsEvent;
 import com.michaelfotiadis.dota2viewer.injection.Injector;
@@ -32,8 +34,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+
 public class DotaItemsFragment extends BaseRecyclerFragment<GameItem> implements OnItemSelectedListener<GameItem> {
 
+    @BindView(R.id.recycler_view)
+    protected RecyclerView mRecyclerView;
+    protected RecyclerManager<GameItem> mRecyclerManager;
     @Inject
     ImageLoader mImageLoader;
     @Inject
@@ -90,6 +97,16 @@ public class DotaItemsFragment extends BaseRecyclerFragment<GameItem> implements
             setRecyclerError(event.getError());
         }
 
+    }
+
+    @Override
+    protected RecyclerManager<GameItem> getRecyclerManager() {
+        return mRecyclerManager;
+    }
+
+    @Override
+    protected RecyclerView getRecyclerView() {
+        return mRecyclerView;
     }
 
     @Override

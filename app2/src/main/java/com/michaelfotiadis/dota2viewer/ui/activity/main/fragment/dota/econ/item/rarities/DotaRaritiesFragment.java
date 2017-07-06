@@ -4,9 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.michaelfotiadis.dota2viewer.BuildConfig;
+import com.michaelfotiadis.dota2viewer.R;
 import com.michaelfotiadis.dota2viewer.data.loader.JobScheduler;
 import com.michaelfotiadis.dota2viewer.event.dota.econ.FetchedDotaRaritiesEvent;
 import com.michaelfotiadis.dota2viewer.injection.Injector;
@@ -27,8 +29,13 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+
 public class DotaRaritiesFragment extends BaseRecyclerFragment<Rarity> implements OnItemSelectedListener<Rarity> {
 
+    @BindView(R.id.recycler_view)
+    protected RecyclerView mRecyclerView;
+    protected RecyclerManager<Rarity> mRecyclerManager;
     @Inject
     JobScheduler mJobScheduler;
     @Inject
@@ -40,6 +47,16 @@ public class DotaRaritiesFragment extends BaseRecyclerFragment<Rarity> implement
         if (BuildConfig.DEBUG) {
             AppToast.show(getContext(), "Not implemented yet");
         }
+    }
+
+    @Override
+    protected RecyclerManager<Rarity> getRecyclerManager() {
+        return mRecyclerManager;
+    }
+
+    @Override
+    protected RecyclerView getRecyclerView() {
+        return mRecyclerView;
     }
 
     @Override

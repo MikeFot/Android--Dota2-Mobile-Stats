@@ -1,26 +1,25 @@
 package com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user;
 
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.view.View;
 
 import com.michaelfotiadis.dota2viewer.R;
-import com.michaelfotiadis.dota2viewer.event.steam.UserChangedEvent;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.BaseBottomNavFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.library.SteamLibraryFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.profile.SteamProfileFragment;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import butterknife.BindView;
 
 public class SteamUserNavFragment extends BaseBottomNavFragment {
 
+
+    @BindView(R.id.navigation)
+    protected BottomNavigationView mNavigationView;
+
     @Override
-    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getEventLifecycleListener().enable();
+    protected BottomNavigationView getNavigationView() {
+        return mNavigationView;
     }
 
     @Override
@@ -50,11 +49,6 @@ public class SteamUserNavFragment extends BaseBottomNavFragment {
         }
         return fragment;
 
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onUserChangedEvent(final UserChangedEvent event) {
-        refreshCurrentPage();
     }
 
     public static Fragment newInstance() {

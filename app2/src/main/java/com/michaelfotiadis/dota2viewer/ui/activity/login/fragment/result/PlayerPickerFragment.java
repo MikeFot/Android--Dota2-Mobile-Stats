@@ -3,6 +3,8 @@ package com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.result;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.michaelfotiadis.dota2viewer.R;
@@ -13,8 +15,15 @@ import com.michaelfotiadis.dota2viewer.data.persistence.model.Players;
 import com.michaelfotiadis.dota2viewer.data.persistence.preference.UserPreferences;
 import com.michaelfotiadis.dota2viewer.event.dota.match.FetchedDotaMatchOverviewsEvent;
 import com.michaelfotiadis.dota2viewer.injection.Injector;
+import com.michaelfotiadis.dota2viewer.ui.activity.login.fragment.result.recycler.PlayerRecyclerAdapter;
+import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.match.overview.recycler.MatchesItemAnimator;
 import com.michaelfotiadis.dota2viewer.ui.core.base.fragment.BaseFragment;
+import com.michaelfotiadis.dota2viewer.ui.core.base.fragment.BaseRecyclerFragment;
+import com.michaelfotiadis.dota2viewer.ui.core.base.recyclerview.manager.RecyclerManager;
+import com.michaelfotiadis.dota2viewer.ui.core.base.viewmanagement.SimpleUiStateKeeper;
+import com.michaelfotiadis.dota2viewer.ui.core.base.viewmanagement.UiStateKeeper;
 import com.michaelfotiadis.dota2viewer.ui.core.toast.AppToast;
+import com.michaelfotiadis.dota2viewer.ui.image.ImageLoader;
 import com.michaelfotiadis.dota2viewer.utils.AppLog;
 import com.michaelfotiadis.steam.data.steam.users.user.PlayerSummary;
 import com.michaelfotiadis.steam.utils.SteamIdUtils;
@@ -26,13 +35,22 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class PlayerPickerFragment extends BaseUserRecyclerFragment implements OnUserSelectedListener {
+import butterknife.BindView;
+
+public class PlayerPickerFragment extends BaseRecyclerFragment<PlayerWrapper> implements OnUserSelectedListener {
 
     private static final String EXTRA = PlayerPickerFragment.class.getSimpleName();
+
+    @BindView(R.id.recycler_view)
+    protected RecyclerView mRecyclerView;
+    protected RecyclerManager<PlayerWrapper> mRecyclerManager;
+    protected PlayerRecyclerAdapter mAdapter;
     @Inject
     DbAccessor mDbAccessor;
     @Inject
     JobScheduler mJobScheduler;
+    @Inject
+    ImageLoader mImageLoader;
 
     @Override
     public void onAttach(final Context context) {
@@ -49,6 +67,38 @@ public class PlayerPickerFragment extends BaseUserRecyclerFragment implements On
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(getString(R.string.title_select_account));
+    }
+
+    @Override
+    protected RecyclerManager<PlayerWrapper> getRecyclerManager() {
+        return mRecyclerManager;
+    }
+
+    @Override
+    protected RecyclerView getRecyclerView() {
+        return mRecyclerView;
+    }
+
+    @Override
+    protected void initRecyclerManager(final View view) {
+        final UiStateKeeper uiStateKeeper = new SimpleUiStateKeeper(view, mRecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mAdapter = new PlayerRecyclerAdapter(getActivity(), mImageLoader, this);
+        mRecyclerManager = new RecyclerManager.Builder<>(mAdapter)
+                .setRecycler(mRecyclerView)
+                .setStateKeeper(uiStateKeeper)
+                .setAnimator(new MatchesItemAnimator())
+                .setEmptyMessage("Nothing to see here")
+                .build();
+        mRecyclerManager.updateUiState();
+    }
+
+    @Override
     protected void loadData() {
         final Players players = (Players) getArguments().get(EXTRA);
         if (players != null) {
@@ -61,12 +111,6 @@ public class PlayerPickerFragment extends BaseUserRecyclerFragment implements On
         } else {
             mRecyclerManager.setError("Something has gone wrong");
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getActivity().setTitle(getString(R.string.title_select_account));
     }
 
     @Override

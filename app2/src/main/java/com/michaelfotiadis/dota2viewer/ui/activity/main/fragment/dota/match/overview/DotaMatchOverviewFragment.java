@@ -40,6 +40,7 @@ import com.michaelfotiadis.dota2viewer.ui.core.base.viewmanagement.UiStateKeeper
 import com.michaelfotiadis.dota2viewer.ui.image.ImageLoader;
 import com.michaelfotiadis.dota2viewer.ui.view.utils.RecyclerUtils;
 import com.michaelfotiadis.dota2viewer.utils.AppLog;
+import com.michaelfotiadis.dota2viewer.utils.TextUtils;
 import com.michaelfotiadis.steam.data.dota2.model.match.overview.MatchOverview;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -66,10 +67,11 @@ public class DotaMatchOverviewFragment extends BaseFragment implements OnItemSel
     @Inject
     ImageLoader mImageLoader;
 
+
     private MenuItem mCalendarMenu;
     private MenuItem mRefreshMenu;
     private MatchRecyclerManager mRecyclerManager;
-    private long mCurrentUserId3;
+    private Long mCurrentUserId3;
 
     @Override
     public void onListItemSelected(final View view, final MatchItem item) {
@@ -117,6 +119,11 @@ public class DotaMatchOverviewFragment extends BaseFragment implements OnItemSel
         super.onViewCreated(view, savedInstanceState);
         getEventLifecycleListener().enable();
 
+        initRecyclerView(view);
+        loadData();
+    }
+
+    protected void initRecyclerView(final View view) {
         final UiStateKeeper uiStateKeeper = new SimpleUiStateKeeper(view, mRecyclerView);
         mRecyclerView.setHasFixedSize(false);
 
@@ -144,8 +151,6 @@ public class DotaMatchOverviewFragment extends BaseFragment implements OnItemSel
                         .setEmptyMessage("Nothing to see here"));
 
         mRecyclerManager.updateUiState();
-
-        loadData();
     }
 
     @Override
@@ -233,6 +238,9 @@ public class DotaMatchOverviewFragment extends BaseFragment implements OnItemSel
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDataLoadedEvent(final FetchedDotaMatchDetailsEvent event) {
+        if (TextUtils.isEmpty(getCurrentUserId())) {
+            return;
+        }
         if (event.getError() == null) {
             mRecyclerManager.add(mCurrentUserId3, event.getMatch());
             checkLoaded();
@@ -260,22 +268,31 @@ public class DotaMatchOverviewFragment extends BaseFragment implements OnItemSel
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDataLoadedEvent(final FetchedDotaMatchOverviewsEvent event) {
+
+        if (TextUtils.isEmpty(getCurrentUserId())) {
+            return;
+        }
+
         if (event.getError() == null) {
-            final List<MatchListItem> items = new ArrayList<>();
-            for (final MatchOverview overview : event.getMatchOverviews()) {
-                items.add(new MatchListItem(overview));
+            if (event.getId3().equals(String.valueOf(mCurrentUserId3))) {
+                final List<MatchListItem> items = new ArrayList<>();
+                for (final MatchOverview overview : event.getMatchOverviews()) {
+                    items.add(new MatchListItem(overview));
+                }
+                mRecyclerManager.removeAllLoadingItems();
+                mRecyclerManager.setItems(items);
             }
-            mRecyclerManager.removeAllLoadingItems();
-            mRecyclerManager.setItems(items);
         } else {
             setError(UiDataLoadErrorFactory.createError(getContext(), event.getError()));
         }
     }
 
     protected void loadData() {
-        mRecyclerManager.clearError();
-        mRecyclerManager.updateUiState(State.PROGRESS);
+
+        mRecyclerManager.clearItems();
         if (getCurrentUserId3() != null) {
+            mRecyclerManager.clearError();
+            mRecyclerManager.updateUiState(State.PROGRESS);
             mCurrentUserId3 = getCurrentUserId3();
             mJobScheduler.startFetchDotaMatchOverviewsJob(
                     String.valueOf(mCurrentUserId3), null, REQUESTED_INITIAL_MATCHES, true, true);
@@ -288,7 +305,9 @@ public class DotaMatchOverviewFragment extends BaseFragment implements OnItemSel
             });
 
             mRecyclerManager.setError(getString(R.string.error_no_user), listenerWrapper);
+            mRecyclerManager.updateUiState();
         }
+
 
     }
 
