@@ -1,0 +1,12 @@
+task static_analysis(type: GradleBuild) {
+    description 'Helper task to run all static analysis tasks'
+    tasks = [
+            'assembleDebug', // required for findbugs
+            'pmd',
+            'findbugs',
+            'lintProdDebug']
+
+    doLast {
+        println "---- FINISHED STATIC ANALYSIS ----"
+    }
+}

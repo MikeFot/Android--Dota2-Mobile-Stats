@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    style="@style/AppTheme.CardViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="@dimen/margin_8dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:contentPadding="@dimen/padding_8dp">
+
+    <LinearLayout
+        android:id="@+id/layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/text_name"
+            style="@style/AppTheme.TextView.Info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_medium_large"
+            tools:text="Crystal MaidenCrystal MaidenCrystal MaidenCrystal Maiden"/>
+
+        <TextView
+            android:id="@+id/text_id64"
+            style="@style/AppTheme.TextView.Info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_small"
+            tools:text="Steam ID64: 1343513531513531531"/>
+
+        <TextView
+            android:id="@+id/text_id3"
+            style="@style/AppTheme.TextView.Info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_small"
+            tools:text="Steam ID3: 21323132"/>
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

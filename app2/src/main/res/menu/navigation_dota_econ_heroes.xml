@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_heroes"
+        android:icon="@drawable/ic_assignment_ind_white_24dp"
+        android:title="Heroes"/>
+
+    <item
+        android:id="@+id/navigation_stats"
+        android:icon="@drawable/ic_assessment_white_24dp"
+        android:title="Stats"/>
+
+</menu>

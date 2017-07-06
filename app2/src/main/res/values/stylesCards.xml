@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.CardViewStyle" parent="CardView">
+        <item name="android:layout_marginLeft">@dimen/margin_4dp</item>
+        <item name="android:layout_marginRight">@dimen/margin_4dp</item>
+        <item name="android:layout_marginTop">@dimen/margin_4dp</item>
+        <item name="android:layout_marginBottom">@dimen/margin_4dp</item>
+        <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
+        <item name="cardElevation">@dimen/cardview_default_elevation</item>
+        <item name="cardBackgroundColor">@android:color/white</item>
+    </style>
+
+
+</resources>

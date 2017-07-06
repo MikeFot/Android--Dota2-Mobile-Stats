@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"/>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <ViewFlipper
+            android:id="@+id/cm_std_view_changer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/cm_std_empty"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:clickable="true">
+
+                <include layout="@layout/includable_default_error_page"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cm_std_error"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:clickable="true">
+
+                <include layout="@layout/includable_default_error_page"/>
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/content_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <include
+                android:id="@+id/cm_std_progress"
+                layout="@layout/includable_default_progress"
+                android:clickable="true"/>
+
+        </ViewFlipper>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_about">About</string>
+    <string name="action_rate">Rate</string>
+    <string name="by_author">by Michael Fotiadis</string>
+    <string name="text_about_the_app">I hope you enjoy this app! If you are having any issues, please let me know.</string>
+    <string name="label_ok">OK</string>
+    <string name="dialog_rate_title">Rate the app</string>
+    <string name="dialog_rate_message">Please support the app if you like it!</string>
+    <string name="dialog_ok">Alright!</string>
+    <string name="label_cancel">Cancel</string>
+</resources>

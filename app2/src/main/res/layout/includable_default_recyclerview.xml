@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewFlipper
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cm_std_view_changer"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/cm_std_empty"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true">
+
+        <include layout="@layout/includable_default_error_page"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/cm_std_error"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true">
+
+        <include layout="@layout/includable_default_error_page"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <include
+        android:id="@+id/cm_std_progress"
+        layout="@layout/includable_default_progress"
+        android:clickable="true"/>
+
+</ViewFlipper>

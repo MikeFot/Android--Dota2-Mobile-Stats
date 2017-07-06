@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="text_username">Username</string>
+    <string name="text_label_personal_url">Personal URL</string>
+    <string name="text_label_online_status">Online Status</string>
+    <string name="text_label_last_online">Last Online</string>
+    <string name="text_label_privacy_settings">Privacy Settings</string>
+    <string name="text_label_steam_id">Steam ID</string>
+    <string name="text_label_alias">Alias</string>
+    <string name="text_label_library_size">Library Size</string>
+    <string name="text_label_dota_2">Dota 2</string>
+    <string name="cd_user_avatar">User Avatar</string>
+
+</resources>

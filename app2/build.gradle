@@ -1,0 +1,211 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+plugins {
+    id "net.ltgt.apt" version "0.10"
+}
+apply plugin: 'com.android.application'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+apply plugin: 'io.fabric'
+apply from: '../buildsystem/quality/quality.gradle'
+apply from: '../buildsystem/custom_tasks.gradle'
+apply from: '../buildsystem/common_methods.gradle'
+
+
+final def STRING = "String"
+final def BOOLEAN = "boolean"
+final def LONG = "long"
+final def INT = "int"
+
+final int versionMajor = 0
+final int versionMinor = 0
+final int versionPatch = 1
+final int androidVersionCode = 1
+final String semanticVersion = "${versionMajor}.${versionMinor}.${versionPatch}"
+
+final String leakCanaryVersion = "1.5.1"
+final String butterKnifeVersion = "8.6.0"
+final String daggerVersion = "2.11"
+
+android {
+
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode androidVersionCode
+        versionName semanticVersion
+
+        applicationId "com.michaelfotiadis.mobiledota2"
+
+        vectorDrawables.useSupportLibrary = true
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
+
+
+    }
+
+    signingConfigs {
+
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
+    buildTypes {
+
+        release {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
+            debuggable false
+
+            FileCollection proGuardFileCollection = files { file('./proguard').listFiles() }
+            for (File file : proGuardFileCollection) {
+                proguardFile(file)
+            }
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+
+            logger.info("Used a total of " + getProguardFiles().size() + " Proguard files")
+            for (final File file : getProguardFiles()) {
+                logger.info('Used Proguard File: ' + file.toURI())
+            }
+
+            signingConfig signingConfigs.release
+
+        }
+
+        debug {
+            logger.info('Version code: ' + androidVersionCode)
+            minifyEnabled false
+            debuggable true
+        }
+    }
+
+    productFlavors {
+        prod {
+            resValue("string", "app_name", "Mobile Stats for Dota2")
+            buildConfigField BOOLEAN, "DEV_MODE", "false"
+        }
+
+        beta {
+            resValue("string", "app_name", "Mobile Stats for Dota2 Beta")
+            applicationIdSuffix ".beta"
+            versionNameSuffix "-beta"
+            buildConfigField BOOLEAN, "DEV_MODE", "false"
+        }
+
+        dev {
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            resValue("string", "app_name", "Mobile Stats for Dota2 Debug")
+            buildConfigField BOOLEAN, "DEV_MODE", "true"
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
+
+}
+
+dependencies {
+
+    // support and design libraries
+    compile "com.android.support:support-v13:$rootProject.appCompatLibVersion"
+    compile "com.android.support:appcompat-v7:$rootProject.appCompatLibVersion"
+    compile "com.android.support:cardview-v7:$rootProject.appCompatLibVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.appCompatLibVersion"
+    compile "com.android.support:design:$rootProject.appCompatLibVersion"
+    compile "com.android.support:customtabs:$rootProject.appCompatLibVersion"
+    compile "com.android.support:support-vector-drawable:$rootProject.appCompatLibVersion"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    // leak canary
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+
+    // dependency injection
+    compile "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    compile "com.jakewharton:butterknife:$butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+
+    // mike penz material drawer
+    compile('com.mikepenz:materialdrawer:5.9.2@aar') {
+        transitive = true
+    }
+    // optional iconics
+    compile 'com.mikepenz:google-material-typeface:3.0.1.0.original@aar'
+    compile 'com.mikepenz:fontawesome-typeface:4.7.0.0@aar'
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
+
+    // Michael's awesome libraries
+    compile 'com.michaelfotiadis:java-steam-loader:2.0.0'
+    compile 'com.michaelfotiadis:android-country-flags:1.0.3'
+    compile 'mikefot:com.michaelfotiadis.validator.annotated:1.0.2'
+
+    // Alex's resource mirror
+    compile 'uk.co.alt236:resource-mirror-android:1.0.0'
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.douglasjunior:android-simple-tooltip:0.2.0'
+    compile 'net.danlew:android.joda:2.9.9'
+    compile 'com.birbit:android-priority-jobqueue:2.0.1'
+    compile 'org.greenrobot:eventbus:3.0.0'
+
+    // charting library, one version old (current is 3++)
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
+
+    // architectural components
+    compile 'android.arch.lifecycle:runtime:1.0.0-alpha1'
+    compile 'android.arch.lifecycle:extensions:1.0.0-alpha1'
+    compile 'android.arch.persistence.room:runtime:1.0.0-alpha1'
+    annotationProcessor 'android.arch.lifecycle:compiler:1.0.0-alpha1'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0-alpha1'
+
+    testCompile 'junit:junit:4.12'
+
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+        transitive = true;
+    }
+
+
+}

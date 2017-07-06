@@ -1,0 +1,30 @@
+// Project Settings
+ext.buildToolsVersion = '25.0.2'
+ext.minSdkVersion = 15
+ext.compileSdkVersion = 25
+ext.targetSdkVersion = 25
+// Lib Versions
+ext.appCompatLibVersion = "25.3.1"
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'io.fabric.tools:gradle:1.22.1'
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url "https://dl.bintray.com/mikefot/maven/" }
+        maven { url "https://dl.bintray.com/alt236/maven/" }
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url "https://maven.google.com" }
+        maven { url "https://jitpack.io" }
+        jcenter()
+        mavenCentral()
+    }
+}

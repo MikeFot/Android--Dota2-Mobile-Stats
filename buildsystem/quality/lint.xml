@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="InvalidPackage">
+        <ignore regexp="okio-.*jar"/>
+    </issue>
+
+    <issue id="SetJavaScriptEnabled" severity="ignore"/>
+
+    <issue id="AppCompatResource">
+        <ignore regexp="res/menu/.*"/>
+    </issue>
+
+    <issue id="GradleDependency" severity="ignore"/>
+
+    <issue id="UnusedResources">
+        <ignore regexp="res/xml/global_tracker.xml"/>
+    </issue>
+
+    <issue id="UnusedAttribute">
+        <ignore regexp="src/main/AndroidManifest.xml"/>
+    </issue>
+
+    <issue id="CommitPrefEdits">
+        <ignore regexp=".*/SharedPrefsUtil.java"/>
+    </issue>
+
+    <!-- Currently agreed to use xhdpi and xxhdpi resources -->
+    <issue id="IconDensities">
+        <ignore regexp="res/drawable-mdpi"/>
+        <ignore regexp="res/drawable-hdpi"/>
+        <ignore regexp="res/drawable-xxxhdpi"/>
+    </issue>
+
+    <!-- ignore internationalisation related issues-->
+    <issue id="RelativeOverlap" severity="ignore"/>
+    <issue id="RtlSymmetry" severity="ignore"/>
+    <issue id="RtlHardcoded" severity="ignore"/>
+
+    <!-- ignore difference in portrait/landscape for My Usages view -->
+    <issue id="InconsistentLayout">
+        <ignore regexp="res/layout/fragment_usage.xml"/>
+        <ignore regexp="res/layout-land/fragment_usage.xml"/>
+        <ignore regexp="res/layout/activity_main.xml"/>
+    </issue>
+
+    <!-- We need to ensure background, otherwise there are visual artifacts on API 18 -->
+    <issue id="Overdraw">
+        <ignore regexp="res/layout/activity_web.xml"/>
+    </issue>
+
+    <issue id="StringFormatInvalid">
+        <ignore regexp="res/values/strings.xml"/>
+    </issue>
+
+</lint>

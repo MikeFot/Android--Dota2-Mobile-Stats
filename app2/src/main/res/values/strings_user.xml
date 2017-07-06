@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="date_format_account_view">dd/MM/yyyy</string>
+
+    <string name="text_steam_privacy_private">Private</string>
+    <string name="text_steam_privacy_public">Public</string>
+
+    <string name="text_status_offline">Offline</string>
+    <string name="text_status_online">Online</string>
+    <string name="text_status_busy">Busy</string>
+    <string name="text_status_away">Away</string>
+    <string name="text_status_snooze">Snooze</string>
+    <string name="text_status_trade">Looking to trade</string>
+    <string name="text_status_looking">Looking to play</string>
+
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Game Mode-->
+    <string name="game_mode_unknown">Unknown</string>
+    <string name="game_mode_all_pick">All Pick</string>
+    <string name="game_mode_captains_mode">Captains Mode</string>
+    <string name="game_mode_random_draft">Random Draft</string>
+    <string name="game_mode_single_draft">Single Draft</string>
+    <string name="game_mode_all_random">All Random</string>
+    <string name="game_mode_intro_death">Intro Death</string>
+    <string name="game_mode_diretide">Diretide</string>
+    <string name="game_mode_reverse_captains_mode">Reverse Captains Mode</string>
+    <string name="game_mode_greeviling">Greeviling</string>
+    <string name="game_mode_tutorial">Tutorial</string>
+    <string name="game_mode_mid_only">Mid Only</string>
+    <string name="game_mode_least_played">Least Played</string>
+    <string name="game_mode_new_player_pool">New Player Pool</string>
+    <string name="game_mode_compendium_watching">Compendium Matching</string>
+    <string name="game_mode_custom">Custom</string>
+    <string name="game_mode_captains_draft">Captains Draft</string>
+    <string name="game_mode_balanced_draft">Balanced Draft</string>
+    <string name="game_mode_ability_draft">Ability Draft</string>
+    <string name="game_mode_event">Event</string>
+    <string name="game_mode_all_random_death_match">Random Death Match</string>
+    <string name="game_mode_solo_mid">Solo Mid</string>
+    <string name="game_mode_all_draft">All Draft</string>
+
+    <!--Lobby-->
+    <string name="lobby_type_unknown">Unknown</string>
+    <string name="lobby_type_public_matchmaking">Public Matchmaking</string>
+    <string name="lobby_type_practice">Practice</string>
+    <string name="lobby_type_tournament">Tournament</string>
+    <string name="lobby_type_tutorial">Tutorial</string>
+    <string name="lobby_type_coop_with_bots">Coop with Bots</string>
+    <string name="lobby_type_team_match">Team Match</string>
+    <string name="lobby_type_solo_queue">Solo Queue</string>
+    <string name="lobby_type_ranked">Ranked</string>
+    <string name="lobby_type_solo_mid">Solo Mid</string>
+
+    <!--Leaver-->
+    <string name="leaver_dc">Disconnected</string>
+    <string name="leaver_timeout">Abandon (timeout)</string>
+    <string name="leaver_abandon">Abandoned</string>
+    <string name="leaver_afk">AFK</string>
+    <string name="leaver_never_connected">Never Connected</string>
+    <string name="leaver_never_connected_timeout">Connection Timeout</string>
+
+</resources>
