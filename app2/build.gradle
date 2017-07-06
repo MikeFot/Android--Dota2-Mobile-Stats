@@ -1,12 +1,4 @@
-buildscript {
-    repositories {
-        maven { url 'https://maven.fabric.io/public' }
-    }
 
-    dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
-    }
-}
 plugins {
     id "net.ltgt.apt" version "0.10"
 }
@@ -36,6 +28,8 @@ final String semanticVersion = "${versionMajor}.${versionMinor}.${versionPatch}"
 final String leakCanaryVersion = "1.5.1"
 final String butterKnifeVersion = "8.6.0"
 final String daggerVersion = "2.11"
+final String archLifecycleVersion = "1.0.0-alpha3"
+final String archRoomVersion = "1.0.0-alpha3"
 
 android {
 
@@ -191,11 +185,12 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
 
     // architectural components
-    compile 'android.arch.lifecycle:runtime:1.0.0-alpha1'
-    compile 'android.arch.lifecycle:extensions:1.0.0-alpha1'
-    compile 'android.arch.persistence.room:runtime:1.0.0-alpha1'
-    annotationProcessor 'android.arch.lifecycle:compiler:1.0.0-alpha1'
-    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0-alpha1'
+    compile "android.arch.lifecycle:runtime:$archLifecycleVersion"
+    compile "android.arch.lifecycle:extensions:$archLifecycleVersion"
+    annotationProcessor "android.arch.lifecycle:compiler:$archLifecycleVersion"
+
+    compile "android.arch.persistence.room:runtime:$archRoomVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$archRoomVersion"
 
     testCompile 'junit:junit:4.12'
 
