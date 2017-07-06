@@ -134,6 +134,9 @@ public class SteamProfileFragment extends BaseUserRecyclerFragment {
             case R.id.action_delete:
                 deleteUser(getCurrentUserId());
                 return true;
+            case R.id.action_add:
+                getIntentDispatcher().openLoginActivity(item.getActionView());
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -133,6 +133,7 @@
     <string name="attr_attack_point">Attack Point:</string>
     <string name="attr_attack_backswing">Attack Backswing:</string>
     <string name="attr_vision_day_night">Vision Day / Night:</string>
+    <string name="menu_item_add_user">Add User</string>
 
 
 </resources>
