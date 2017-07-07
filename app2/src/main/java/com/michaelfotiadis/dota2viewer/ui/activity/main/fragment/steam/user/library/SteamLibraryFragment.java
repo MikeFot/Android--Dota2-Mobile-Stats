@@ -173,6 +173,7 @@ public class SteamLibraryFragment extends BaseRecyclerFragment<Game> implements 
             return;
         }
 
+        mRecyclerManager.clearItems();
         if (payload.getError() == null) {
 
             final List<Game> games = new ArrayList<>(payload.getGames());

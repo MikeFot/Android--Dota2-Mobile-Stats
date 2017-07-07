@@ -9,11 +9,12 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:layout_margin="@dimen/margin_8dp"
-    android:clickable="true"
-    card_view:contentPadding="@dimen/padding_8dp"
-    android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    card_view:cardUseCompatPadding="true">
+    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="@dimen/margin_8dp"
+    android:layout_marginRight="@dimen/margin_8dp"
+    android:layout_marginTop="2dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:contentPadding="@dimen/padding_8dp">
 
     <LinearLayout
         android:id="@+id/layout_container"
@@ -22,7 +23,16 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/text_placeholder"
+            android:id="@+id/text_name"
+            style="@style/AppTheme.TextView.Info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_medium_large"
+            tools:text="Placeholder"/>
+
+        <TextView
+            android:id="@+id/text_id"
+            style="@style/AppTheme.TextView.Info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Placeholder"/>

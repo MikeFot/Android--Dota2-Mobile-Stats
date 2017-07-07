@@ -12,7 +12,7 @@ import butterknife.BindView;
 
 public class GameItemsViewHolder extends BaseRecyclerViewHolder {
 
-    @BindView(R.id.text_placeholder)
+    @BindView(R.id.text_name)
     TextView mTextView;
     @BindView(R.id.image)
     ImageView mImageView;

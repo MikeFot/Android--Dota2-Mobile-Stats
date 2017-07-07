@@ -29,7 +29,7 @@
             android:contentDescription="Hero Portrait"/>
 
         <TextView
-            android:id="@+id/text_placeholder"
+            android:id="@+id/text_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Placeholder"/>

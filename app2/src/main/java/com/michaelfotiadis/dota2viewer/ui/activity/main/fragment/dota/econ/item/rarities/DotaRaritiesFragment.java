@@ -27,6 +27,11 @@ import com.michaelfotiadis.steam.data.dota2.model.rarity.Rarity;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -97,6 +102,15 @@ public class DotaRaritiesFragment extends BaseRecyclerFragment<Rarity> implement
         AppLog.d("Data loaded");
         if (event.getError() == null) {
             AppLog.d("Loaded " + event.getRarities().size() + " rarities");
+
+            final List<Rarity> data = new ArrayList<>(event.getRarities());
+            Collections.sort(data, new Comparator<Rarity>() {
+                @Override
+                public int compare(final Rarity o1, final Rarity o2) {
+                    return o2.getOrder() - o1.getOrder();
+                }
+            });
+
             mRecyclerManager.setItems(event.getRarities());
         } else {
             setRecyclerError(event.getError());

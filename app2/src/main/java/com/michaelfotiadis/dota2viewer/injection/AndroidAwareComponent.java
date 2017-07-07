@@ -17,6 +17,7 @@ import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.match.Dota
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.match.league.DotaLeagueListingsFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.match.live.DotaLiveGamesFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.match.overview.DotaMatchOverviewFragment;
+import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.SteamUserNavFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.library.SteamLibraryFragment;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.library.viewmodel.SteamLibraryViewModel;
 import com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.steam.user.profile.SteamProfileFragment;
@@ -77,4 +78,6 @@ public interface AndroidAwareComponent {
     void inject(SteamProfileViewModel steamProfileViewModel);
 
     void inject(DotaMatchNavFragment dotaMatchNavFragment);
+
+    void inject(SteamUserNavFragment steamUserNavFragment);
 }

@@ -135,5 +135,8 @@
     <string name="attr_vision_day_night">Vision Day / Night:</string>
     <string name="menu_item_add_user">Add User</string>
 
+    <!--Rarity-->
+    <string name="rarity_id">"ID: %1$s"</string>
+    <string name="rarity_order">"Order: %1$s"</string>
 
 </resources>

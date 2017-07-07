@@ -1,7 +1,9 @@
 package com.michaelfotiadis.dota2viewer.ui.activity.main.fragment.dota.econ.item.rarities.recycler;
 
 import android.support.annotation.LayoutRes;
+import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.michaelfotiadis.dota2viewer.R;
@@ -9,15 +11,21 @@ import com.michaelfotiadis.dota2viewer.ui.core.base.recyclerview.viewholder.Base
 
 import butterknife.BindView;
 
-public class RarityViewHolder extends BaseRecyclerViewHolder {
+class RarityViewHolder extends BaseRecyclerViewHolder {
 
-    @BindView(R.id.text_placeholder)
-    TextView mTextView;
+    @BindView(R.id.text_name)
+    TextView mTextName;
 
     @LayoutRes
     private static final int LAYOUT_ID = R.layout.list_item_game_rarity;
+    @BindView(R.id.text_id)
+    TextView mTextId;
+    @BindView(R.id.layout_container)
+    LinearLayout mLayoutContainer;
+    @BindView(R.id.card_view)
+    CardView mCardView;
 
-    protected RarityViewHolder(final View view) {
+    RarityViewHolder(final View view) {
         super(view);
     }
 
