@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<com.michaelfotiadis.dota2viewer.ui.view.calendar.CheckableLayout
+<com.michaelfotiadis.mobiledota2.ui.view.calendar.CheckableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="12dp"
     android:layout_height="match_parent"
@@ -7,4 +7,4 @@
     style="@style/CalendarCard.Cell"
     android:clickable="true">
 
-</com.michaelfotiadis.dota2viewer.ui.view.calendar.CheckableLayout>
+</com.michaelfotiadis.mobiledota2.ui.view.calendar.CheckableLayout>

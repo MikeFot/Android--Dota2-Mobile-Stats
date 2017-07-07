@@ -22,7 +22,7 @@
             app:cardBackgroundColor="@color/grey_light"
             app:cardCornerRadius="8dp">
 
-            <com.michaelfotiadis.dota2viewer.ui.view.map.DotaMapView
+            <com.michaelfotiadis.mobiledota2.ui.view.map.DotaMapView
                 android:id="@+id/map_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

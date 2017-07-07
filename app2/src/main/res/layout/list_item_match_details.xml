@@ -151,7 +151,7 @@
             app:layout_constraintTop_toBottomOf="@+id/text_content_last_hits"
             tools:text="Leaver Status"/>
 
-        <com.michaelfotiadis.dota2viewer.ui.view.ThreeBarView
+        <com.michaelfotiadis.mobiledota2.ui.view.ThreeBarView
             android:id="@+id/bar_three_color"
             style="@style/AppTheme.TextView.Info"
             android:layout_width="0dp"

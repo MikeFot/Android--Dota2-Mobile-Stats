@@ -12,7 +12,7 @@
     card_view:cardUseCompatPadding="true"
     card_view:contentPadding="@dimen/padding_8dp">
 
-    <com.michaelfotiadis.dota2viewer.ui.view.calendar.CalendarCard
+    <com.michaelfotiadis.mobiledota2.ui.view.calendar.CalendarCard
         android:id="@+id/calendar_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

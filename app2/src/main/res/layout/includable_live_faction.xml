@@ -8,7 +8,7 @@
     android:orientation="horizontal"
     android:padding="@dimen/padding_4dp">
 
-    <com.michaelfotiadis.dota2viewer.ui.view.VerticalTextView
+    <com.michaelfotiadis.mobiledota2.ui.view.VerticalTextView
         android:id="@+id/faction_title"
         style="@style/AppTheme.TextView"
         android:layout_width="wrap_content"

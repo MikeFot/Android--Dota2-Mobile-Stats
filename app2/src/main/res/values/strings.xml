@@ -138,5 +138,12 @@
     <!--Rarity-->
     <string name="rarity_id">"ID: %1$s"</string>
     <string name="rarity_order">"Order: %1$s"</string>
+    <string name="ct_item_portrait">Item Portrait</string>
+
+    <!--Items-->
+    <string name="item_cost">"Cost: %1$s"</string>
+    <string name="item_side_shop">Side Shop</string>
+    <string name="item_secret_shop">Secret Shop</string>
+    <string name="title_login">Login</string>
 
 </resources>
