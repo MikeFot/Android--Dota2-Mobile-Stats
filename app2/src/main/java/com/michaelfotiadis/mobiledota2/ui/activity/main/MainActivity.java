@@ -24,6 +24,7 @@ import com.michaelfotiadis.mobiledota2.data.persistence.db.DatabaseCreator;
 import com.michaelfotiadis.mobiledota2.data.persistence.db.model.PlayerEntity;
 import com.michaelfotiadis.mobiledota2.data.persistence.preference.UserPreferences;
 import com.michaelfotiadis.mobiledota2.injection.Injector;
+import com.michaelfotiadis.mobiledota2.network.ConnectivityUtils;
 import com.michaelfotiadis.mobiledota2.ui.activity.main.fragment.dota.econ.hero.DotaEconHeroesNavFragment;
 import com.michaelfotiadis.mobiledota2.ui.activity.main.fragment.dota.econ.item.DotaEconItemsNavFragment;
 import com.michaelfotiadis.mobiledota2.ui.activity.main.fragment.dota.match.DotaMatchNavFragment;
@@ -110,9 +111,11 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-
-        mJobScheduler.startFetchDotaHeroesJob();
-        mJobScheduler.startFetchDotaItemsJob();
+        if (mUserPreferences.getIsFirstRun() && ConnectivityUtils.isConnected(this)) {
+            mJobScheduler.startFetchDotaHeroesJob();
+            mJobScheduler.startFetchDotaItemsJob();
+            mUserPreferences.writeIsFirstRun(false);
+        }
 
     }
 

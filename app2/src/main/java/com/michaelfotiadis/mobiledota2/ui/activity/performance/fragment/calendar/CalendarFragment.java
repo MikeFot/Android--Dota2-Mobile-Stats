@@ -19,6 +19,7 @@ import com.michaelfotiadis.mobiledota2.R;
 import com.michaelfotiadis.mobiledota2.data.loader.JobScheduler;
 import com.michaelfotiadis.mobiledota2.data.persistence.db.AppDatabase;
 import com.michaelfotiadis.mobiledota2.data.persistence.db.model.DotaMatchDetailsEntity;
+import com.michaelfotiadis.mobiledota2.data.persistence.error.UiDataLoadErrorFactory;
 import com.michaelfotiadis.mobiledota2.injection.Injector;
 import com.michaelfotiadis.mobiledota2.ui.activity.performance.fragment.calendar.dialog.WinsDialog;
 import com.michaelfotiadis.mobiledota2.ui.activity.performance.fragment.calendar.model.GameDateStats;
@@ -123,7 +124,7 @@ public class CalendarFragment extends BaseFragment {
             @Override
             public void run() {
 
-                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+                Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
                 final List<DotaMatchDetailsEntity> entities = mAppDatabase.getDotaMatchDetailsDao().getAllSync();
 
@@ -147,8 +148,15 @@ public class CalendarFragment extends BaseFragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        getActivity().setTitle(getString(R.string.title_last_matches, matchDetailsList.size()));
-                        mAdapter.setStats(stats);
+
+                        if (stats.size() == 0) {
+                            getActivity().setTitle(getString(R.string.title_no_matches));
+                            mRecyclerManager.setError(UiDataLoadErrorFactory.createGenericError(getContext()).getMessage());
+                        } else {
+                            getActivity().setTitle(getString(R.string.title_last_matches, matchDetailsList.size()));
+                            mAdapter.setStats(stats);
+                        }
+                        mRecyclerManager.updateUiState();
                     }
                 });
 

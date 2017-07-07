@@ -22,6 +22,8 @@ public interface IntentDispatcher {
 
     void openLoginActivity(View view);
 
+    void openHelpActivity();
+
     void openMatchDetailsActivity(View view, MatchContainer match);
 
     void openPerformanceActivity();

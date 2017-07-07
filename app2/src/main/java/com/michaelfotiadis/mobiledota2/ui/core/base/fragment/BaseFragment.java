@@ -25,9 +25,14 @@ public abstract class BaseFragment extends Fragment implements LifecycleRegistry
     private EventLifecycleListener mEventLifecycleListener;
 
     @Override
+    public void onAttach(final Context context) {
+        super.onAttach(context);
+        mLifecycleRegistry = new LifecycleRegistry(this);
+    }
+
+    @Override
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLifecycleRegistry = new LifecycleRegistry(this);
         setRetainInstance(true);
     }
 

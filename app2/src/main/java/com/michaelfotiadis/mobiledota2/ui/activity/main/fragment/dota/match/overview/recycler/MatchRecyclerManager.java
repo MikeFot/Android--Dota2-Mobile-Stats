@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import com.michaelfotiadis.mobiledota2.data.persistence.error.UiDataLoadError;
 import com.michaelfotiadis.mobiledota2.ui.activity.main.fragment.dota.match.overview.model.MatchListItem;
 import com.michaelfotiadis.mobiledota2.ui.core.base.recyclerview.manager.RecyclerManager;
+import com.michaelfotiadis.mobiledota2.ui.core.base.recyclerview.manager.State;
 import com.michaelfotiadis.steam.data.dota2.model.hero.Hero;
 import com.michaelfotiadis.steam.data.dota2.model.item.GameItem;
 import com.michaelfotiadis.steam.data.dota2.model.match.details.MatchDetails;
@@ -57,7 +58,9 @@ public class MatchRecyclerManager extends RecyclerManager<MatchListItem> {
 
     public boolean isLoading() {
 
-        if (isLoadingMore()) {
+        if (getState().equals(State.ERROR)) {
+            return false;
+        } else if (isLoadingMore()) {
             return true;
         } else if (mAdapter.getItems().isEmpty()) {
             return true;
@@ -65,7 +68,6 @@ public class MatchRecyclerManager extends RecyclerManager<MatchListItem> {
                 ((MatchRecyclerAdapter) mAdapter).getDotaItems().isEmpty()) {
             return true;
         } else {
-
             for (final MatchListItem item : mAdapter.getItems()) {
                 if (!item.isDetailsItem()) {
                     return true;

@@ -3,7 +3,7 @@ package com.michaelfotiadis.mobiledota2.ui.activity.main.fragment.dota.econ.item
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -25,6 +25,7 @@ import com.michaelfotiadis.mobiledota2.ui.core.base.viewmanagement.SimpleUiState
 import com.michaelfotiadis.mobiledota2.ui.core.base.viewmanagement.UiStateKeeper;
 import com.michaelfotiadis.mobiledota2.ui.core.toast.AppToast;
 import com.michaelfotiadis.mobiledota2.ui.image.ImageLoader;
+import com.michaelfotiadis.mobiledota2.ui.view.utils.RecyclerUtils;
 import com.michaelfotiadis.mobiledota2.utils.AppLog;
 import com.michaelfotiadis.mobiledota2.utils.TextUtils;
 import com.michaelfotiadis.mobiledota2.utils.dota.SearchFilterUtils;
@@ -124,8 +125,13 @@ public class DotaItemsFragment extends BaseRecyclerFragment<GameItem> implements
     protected void initRecyclerManager(final View view) {
         final UiStateKeeper uiStateKeeper = new SimpleUiStateKeeper(view, mRecyclerView);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        final int columns = RecyclerUtils.getColumnsForScreen(getActivity());
+        final GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), columns);
+        layoutManager.setOrientation(GridLayoutManager.VERTICAL);
+
+
+        mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerManager = new RecyclerManager.Builder<>(new GameItemsRecyclerAdapter(getActivity(), mImageLoader, this))
                 .setRecycler(mRecyclerView)
                 .setStateKeeper(uiStateKeeper)

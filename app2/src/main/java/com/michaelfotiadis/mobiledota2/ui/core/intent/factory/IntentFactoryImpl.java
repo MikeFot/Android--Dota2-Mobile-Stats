@@ -9,6 +9,7 @@ import android.net.Uri;
 
 import com.michaelfotiadis.mobiledota2.ui.activity.details.MatchContainer;
 import com.michaelfotiadis.mobiledota2.ui.activity.details.MatchDetailsActivity;
+import com.michaelfotiadis.mobiledota2.ui.activity.login.HelpActivity;
 import com.michaelfotiadis.mobiledota2.ui.activity.login.LoginActivity;
 import com.michaelfotiadis.mobiledota2.ui.activity.main.MainActivity;
 import com.michaelfotiadis.mobiledota2.ui.activity.performance.PerformanceActivity;
@@ -83,6 +84,11 @@ public class IntentFactoryImpl implements IntentFactory {
         }
         // if GP not present on device, open web browser
         return new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + mContext.getPackageName()));
+    }
+
+    @Override
+    public Intent getHelpIntent() {
+        return HelpActivity.newInstance(mContext);
     }
 
 

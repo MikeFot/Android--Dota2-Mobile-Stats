@@ -1,9 +1,6 @@
 package com.michaelfotiadis.mobiledota2.ui.activity.main.fragment.steam.user.library;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
@@ -19,6 +16,7 @@ import com.michaelfotiadis.mobiledota2.R;
 import com.michaelfotiadis.mobiledota2.data.persistence.error.UiDataLoadError;
 import com.michaelfotiadis.mobiledota2.data.persistence.error.UiDataLoadErrorFactory;
 import com.michaelfotiadis.mobiledota2.data.persistence.preference.UserPreferences;
+import com.michaelfotiadis.mobiledota2.event.listener.EventLifecycleListener;
 import com.michaelfotiadis.mobiledota2.injection.Injector;
 import com.michaelfotiadis.mobiledota2.ui.activity.main.fragment.steam.user.library.recycler.GameRecyclerAdapter;
 import com.michaelfotiadis.mobiledota2.ui.activity.main.fragment.steam.user.library.viewmodel.SteamLibraryPayload;
@@ -38,8 +36,6 @@ import com.michaelfotiadis.mobiledota2.utils.AppLog;
 import com.michaelfotiadis.mobiledota2.utils.TextUtils;
 import com.michaelfotiadis.mobiledota2.utils.steam.SteamUrlUtils;
 import com.michaelfotiadis.steam.data.steam.player.library.Game;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,6 +57,7 @@ public class SteamLibraryFragment extends BaseRecyclerFragment<Game> implements 
     UserPreferences mUserPreferences;
 
     private SteamLibraryViewModel mViewModel;
+    private EventLifecycleListener<SteamLibraryViewModel> mModelEventListener;
 
     @Override
     public void onListItemSelected(final View view, final Game game) {
@@ -83,47 +80,11 @@ public class SteamLibraryFragment extends BaseRecyclerFragment<Game> implements 
         Answers.getInstance().logContentView(new ContentViewEvent()
                 .putContentName("Steam Library")
                 .putContentType("Screen"));
+
         mViewModel = ViewModelProviders.of(this).get(SteamLibraryViewModel.class);
-    }
+        mModelEventListener = new EventLifecycleListener<>(mViewModel, getLifecycle());
+        mModelEventListener.enable();
 
-    @Override
-    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        initRecyclerManager(view);
-
-        // trying out ViewModel with EventBus
-        getLifecycle().addObserver(new LifecycleObserver() {
-            @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-            void onResume() {
-                EventBus.getDefault().register(mViewModel);
-            }
-
-            @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-            void onPause() {
-                EventBus.getDefault().unregister(mViewModel);
-            }
-        });
-
-
-        mViewModel.getGames(getCurrentUserId()).observe(
-                this,
-                new Observer<SteamLibraryPayload>() {
-                    @Override
-                    public void onChanged(@Nullable final SteamLibraryPayload steamLibraryPayload) {
-                        AppLog.d("Received steam library payload " + steamLibraryPayload);
-                        setResult(steamLibraryPayload);
-                    }
-                });
-
-        mUserPreferences.getMutableLivePreference().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable final String userId) {
-                if (mViewModel != null) {
-                    loadData();
-                }
-            }
-        });
     }
 
     @Override
@@ -173,6 +134,33 @@ public class SteamLibraryFragment extends BaseRecyclerFragment<Game> implements 
 
     }
 
+    @Override
+    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initRecyclerManager(view);
+
+        mViewModel.getGames(getCurrentUserId()).observe(
+                this,
+                new Observer<SteamLibraryPayload>() {
+                    @Override
+                    public void onChanged(@Nullable final SteamLibraryPayload steamLibraryPayload) {
+                        AppLog.d("Received steam library payload " + steamLibraryPayload);
+                        setResult(steamLibraryPayload);
+                    }
+                });
+
+        mUserPreferences.getMutableLivePreference().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable final String userId) {
+                if (mViewModel != null) {
+                    loadData();
+                }
+            }
+        });
+
+
+    }
 
     private void setResult(final SteamLibraryPayload payload) {
 
@@ -214,12 +202,6 @@ public class SteamLibraryFragment extends BaseRecyclerFragment<Game> implements 
 
     }
 
-
-    public static BaseFragment newInstance() {
-        return new SteamLibraryFragment();
-    }
-
-
     protected void showNoId() {
         final QuoteOnClickListenerWrapper listenerWrapper = new QuoteOnClickListenerWrapper(R.string.error_label_go_to_login, new View.OnClickListener() {
             @Override
@@ -230,6 +212,10 @@ public class SteamLibraryFragment extends BaseRecyclerFragment<Game> implements 
 
         mRecyclerManager.setError(getString(R.string.error_no_user), listenerWrapper);
         mRecyclerManager.updateUiState();
+    }
+
+    public static BaseFragment newInstance() {
+        return new SteamLibraryFragment();
     }
 
 }

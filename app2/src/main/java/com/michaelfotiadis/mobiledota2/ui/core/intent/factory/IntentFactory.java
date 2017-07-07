@@ -17,4 +17,6 @@ public interface IntentFactory {
     Intent getMatchDetailsIntent(MatchContainer match);
 
     Intent getMarketRateIntent();
+
+    Intent getHelpIntent();
 }

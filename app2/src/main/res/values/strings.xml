@@ -2,6 +2,7 @@
 
     <string name="title_performance">Performance</string>
     <string name="title_last_matches">Last %1$d matches</string>
+    <string name="title_no_matches">No data</string>
 
     <!--Drawer-->
     <string name="drawer_title_steam">Steam</string>
@@ -145,5 +146,13 @@
     <string name="item_side_shop">Side Shop</string>
     <string name="item_secret_shop">Secret Shop</string>
     <string name="title_login">Login</string>
+    <string name="help_1">How to find a User\'s ID</string>
+    <string name="help_2">If you have their vanity URL, it should look like this:</string>
+    <string name="help_3"><![CDATA[http://steamcommunity.com/id/<vanity_name>/]]></string>
+    <string name="help_4">If you have an ID url:</string>
+    <string name="help_6"><![CDATA[Then the <id> is their 64-bit ID and you should copy that e.g. 76561198036748162. A 32-bit ID will also work as it will be converted internally.]]></string>
+    <string name="help_5"><![CDATA[http://steamcommunity.com/profiles/<id>/]]></string>
+    <string name="help_7"><![CDATA[You should copy the <vanity_name> part e.g. ana]]></string>
+    <string name="title_help">Help</string>
 
 </resources>

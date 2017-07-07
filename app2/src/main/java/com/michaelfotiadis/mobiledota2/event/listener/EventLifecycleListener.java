@@ -29,19 +29,21 @@ public class EventLifecycleListener<T> implements LifecycleObserver {
         mLifecycle.removeObserver(this);
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onResume() {
         registerEventBus();
     }
 
     private void registerEventBus() {
-        if (!EventBus.getDefault().isRegistered(mParent)) {
+        if (EventBus.getDefault().isRegistered(mParent)) {
+            AppLog.d("No reason to register event bus for class " + getTag());
+        } else {
             EventBus.getDefault().register(mParent);
             AppLog.d("Event bus registered for class " + getTag());
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     void onPause() {
         unregisterEventBus();
     }
@@ -50,6 +52,8 @@ public class EventLifecycleListener<T> implements LifecycleObserver {
         if (EventBus.getDefault().isRegistered(mParent)) {
             EventBus.getDefault().unregister(mParent);
             AppLog.d("Event bus unregistered for class " + getTag());
+        } else {
+            AppLog.d("No reason to deregister event bus for class " + getTag());
         }
     }
 

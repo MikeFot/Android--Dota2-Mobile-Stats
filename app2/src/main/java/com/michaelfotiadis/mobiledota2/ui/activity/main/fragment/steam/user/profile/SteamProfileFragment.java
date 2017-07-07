@@ -1,9 +1,6 @@
 package com.michaelfotiadis.mobiledota2.ui.activity.main.fragment.steam.user.profile;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +18,7 @@ import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
 import com.michaelfotiadis.mobiledota2.R;
 import com.michaelfotiadis.mobiledota2.data.persistence.preference.UserPreferences;
+import com.michaelfotiadis.mobiledota2.event.listener.EventLifecycleListener;
 import com.michaelfotiadis.mobiledota2.injection.Injector;
 import com.michaelfotiadis.mobiledota2.ui.activity.login.fragment.result.OnUserSelectedListener;
 import com.michaelfotiadis.mobiledota2.ui.activity.login.fragment.result.PlayerWrapper;
@@ -41,8 +39,6 @@ import com.michaelfotiadis.mobiledota2.utils.AppLog;
 import com.michaelfotiadis.mobiledota2.utils.TextUtils;
 import com.michaelfotiadis.steam.data.steam.users.user.PlayerSummary;
 
-import org.greenrobot.eventbus.EventBus;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -61,6 +57,7 @@ public class SteamProfileFragment extends BaseRecyclerFragment<PlayerWrapper> im
 
     private SteamProfileViewModel mViewModel;
     private MenuItem mDeleteItem;
+    private EventLifecycleListener<SteamProfileViewModel> mModelEventListener;
 
     @Override
     public void onUserSelected(final View v, final PlayerSummary playerSummary) {
@@ -86,7 +83,6 @@ public class SteamProfileFragment extends BaseRecyclerFragment<PlayerWrapper> im
     @Override
     public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
         inflater.inflate(R.menu.menu_profile, menu);
-
     }
 
     @Override
@@ -121,10 +117,16 @@ public class SteamProfileFragment extends BaseRecyclerFragment<PlayerWrapper> im
     public void onAttach(final Context context) {
         Injector.getComponentStore().getAndroidAwareComponent().inject(this);
         super.onAttach(context);
+
         Answers.getInstance().logContentView(new ContentViewEvent()
                 .putContentName("Steam Profile Overview")
                 .putContentType("Screen"));
+
         mViewModel = ViewModelProviders.of(this).get(SteamProfileViewModel.class);
+
+        mModelEventListener = new EventLifecycleListener<>(mViewModel, getLifecycle());
+        mModelEventListener.enable();
+
     }
 
     @Override
@@ -132,22 +134,6 @@ public class SteamProfileFragment extends BaseRecyclerFragment<PlayerWrapper> im
         super.onViewCreated(view, savedInstanceState);
 
         initRecyclerManager(view);
-        if (mRecyclerManager == null) {
-            throw new NullPointerException("Null recycler");
-        }
-
-        getLifecycle().addObserver(new LifecycleObserver() {
-            @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-            void onResume() {
-                EventBus.getDefault().register(mViewModel);
-            }
-
-            @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-            void onPause() {
-                EventBus.getDefault().unregister(mViewModel);
-            }
-        });
-
 
         mViewModel.getProfile(getCurrentUserId()).observe(
                 this,
@@ -167,7 +153,6 @@ public class SteamProfileFragment extends BaseRecyclerFragment<PlayerWrapper> im
                 loadData();
             }
         });
-
 
     }
 

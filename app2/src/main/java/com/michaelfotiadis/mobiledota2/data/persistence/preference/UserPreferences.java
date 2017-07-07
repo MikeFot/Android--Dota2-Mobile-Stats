@@ -11,10 +11,21 @@ public class UserPreferences extends PreferenceHandler {
 
     private static final String SHARED_PREFS_FILE = "user.preferences";
     private static final String KEY_USER_ID = "key.user.id";
+    private static final String KEY_FIRST_RUN = "key.is.first.run";
     private SharedPreferences.OnSharedPreferenceChangeListener mListener;
 
     public UserPreferences(final Context context) {
         super(context);
+    }
+
+    public boolean getIsFirstRun() {
+        return getSharedPreferences().getBoolean(KEY_FIRST_RUN, true);
+    }
+
+    public void writeIsFirstRun(final boolean isFirstRun) {
+        final SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean(KEY_FIRST_RUN, isFirstRun);
+        editor.apply();
     }
 
     public String getCurrentUserId() {

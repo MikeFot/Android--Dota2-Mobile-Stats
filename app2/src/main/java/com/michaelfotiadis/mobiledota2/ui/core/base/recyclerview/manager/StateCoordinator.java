@@ -73,6 +73,10 @@ import com.michaelfotiadis.mobiledota2.ui.core.base.viewmanagement.UiStateKeeper
         }
     }
 
+    public State getCurrentState() {
+        return currentState;
+    }
+
     public void setError(final CharSequence errorMessage,
                          final QuoteOnClickListenerWrapper listenerWrapper) {
 

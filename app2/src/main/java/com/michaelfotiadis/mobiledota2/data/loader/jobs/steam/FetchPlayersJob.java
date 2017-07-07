@@ -151,7 +151,6 @@ public class FetchPlayersJob extends BaseJob {
                                         final List<PlayerEntity> entities = PlayerEntity.fromPlayerSummaries(result.getResponse().getPlayers());
                                         mDao.insert(entities);
                                         mDataPreferences.writeProfileUpdated(id64.toString(), System.currentTimeMillis());
-
                                     }
                                 }).start();
                             } else {

@@ -7,17 +7,21 @@
     <fields>;
 }
 
--keep class com.michaelfotiadis.dota2viewer.ui.view.** { *; }
--keep class com.michaelfotiadis.dota2viewer.data.loader.** { *; }
--keep class com.michaelfotiadis.dota2viewer.event.** { *; }
--keep class com.michaelfotiadis.dota2viewer.data.persistence.** { *; }
+-keep class com.michaelfotiadis.mobiledota2.ui.view.** { *; }
+-keep class com.michaelfotiadis.mobiledota2.data.loader.** { *; }
+-keep class com.michaelfotiadis.mobiledota2.event.** { *; }
+-keep class com.michaelfotiadis.mobiledota2.data.persistence.** { *; }
 -keep class com.michaelfotiadis.steam.** { *; }
--keep public interface com.michaelfotiadis.dota2viewer.event.Event {*;}
--keep class * implements com.michaelfotiadis.dota2viewer.event.Event
+-keep class com.michaelfotiadis.mobiledota2.event.listener.EventLifecycleListener { *; }
+-keep public interface com.michaelfotiadis.mobiledota2.event.Event {*;}
+-keep public class * implements com.michaelfotiadis.mobiledota2.event.Event
+-keep public class * extends com.michaelfotiadis.mobiledota2.data.loader.jobs.BaseJob
+-keep public class * extends android.arch.lifecycle.ViewModel
+-keep public class * extends android.arch.lifecycle.Lifecycle
 
 
--keep public interface com.michaelfotiadis.dota2viewer.network.NetworkResolver {*;}
--keep public interface com.michaelfotiadis.dota2viewer.network.api.HeroStatsApi {*;}
+-keep public interface com.michaelfotiadis.mobiledota2.network.NetworkResolver {*;}
+-keep public interface com.michaelfotiadis.mobiledota2.network.api.HeroStatsApi {*;}
 
 
 -keepattributes *Annotation*

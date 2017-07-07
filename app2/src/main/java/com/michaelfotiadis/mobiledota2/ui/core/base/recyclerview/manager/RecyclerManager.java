@@ -119,6 +119,10 @@ public class RecyclerManager<D> {
         mStateCoordinator.updateUiState(state);
     }
 
+    public State getState() {
+        return mStateCoordinator.getCurrentState();
+    }
+
     public static class Builder<D> {
         private final BaseRecyclerViewAdapter<D, ?> adapter;
         private RecyclerView.ItemAnimator animator = new DefaultAppItemAnimator();

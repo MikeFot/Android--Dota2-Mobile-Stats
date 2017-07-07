@@ -32,7 +32,7 @@ public class ImageLoader {
 
         AppLog.d("Looking for drawable name: " + drawableName + " of family " + family);
 
-        return Mirror.of("com.michaelfotiadis.dota2viewer").getDrawables().optListDrawableId(drawableName, getFamily(family), getFallback(family));
+        return Mirror.of("com.michaelfotiadis.mobiledota2").getDrawables().optListDrawableId(drawableName, getFamily(family), getFallback(family));
 
     }
 

@@ -115,6 +115,11 @@ public class IntentDispatcherImpl implements IntentDispatcher {
     }
 
     @Override
+    public void openHelpActivity() {
+        mDispatcher.withAnimation(ActivityAnimation.SLIDE_IN_FROM_LEFT).dispatch(mIntentFactory.getHelpIntent());
+    }
+
+    @Override
     public void openMatchDetailsActivity(final View view, final MatchContainer match) {
         mDispatcher
                 .withView(view)

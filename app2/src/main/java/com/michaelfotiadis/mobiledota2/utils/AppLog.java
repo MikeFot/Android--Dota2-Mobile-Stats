@@ -29,10 +29,7 @@ public final class AppLog {
     }
 
     private static void vInternal(final String message) {
-        if (BuildConfig.DEBUG) {
-            Log.v(calcTag(), calcMessage(message));
-        }
-
+        Log.v(calcTag(), calcMessage(message));
     }
 
     public static void i(final String message) {

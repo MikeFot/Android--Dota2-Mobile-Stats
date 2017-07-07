@@ -269,6 +269,8 @@ public class DotaMatchOverviewFragment extends BaseFragment implements OnItemSel
                     }
                 }));
 
+        checkLoaded();
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -288,6 +290,7 @@ public class DotaMatchOverviewFragment extends BaseFragment implements OnItemSel
                 mRecyclerManager.setItems(items);
             }
         } else {
+            mRecyclerManager.clearItems();
             setError(UiDataLoadErrorFactory.createError(getContext(), event.getError()));
         }
     }

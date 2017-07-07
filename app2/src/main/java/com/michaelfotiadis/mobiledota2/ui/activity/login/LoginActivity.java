@@ -84,7 +84,8 @@ public class LoginActivity extends BaseActivity implements LoginNavigationComman
 
     @Override
     public void showHelp(final View view) {
-        // TODO implement this!!!!
+        Answers.getInstance().logCustom(new CustomEvent("Navigated to Help"));
+        getIntentDispatcher().openHelpActivity();
     }
 
     @Override

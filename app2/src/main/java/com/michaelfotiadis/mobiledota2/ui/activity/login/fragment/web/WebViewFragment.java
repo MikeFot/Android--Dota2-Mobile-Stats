@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +40,7 @@ import butterknife.ButterKnife;
  */
 public class WebViewFragment extends BaseFragment {
 
-    private static final String REALM_PARAM = "Mobile Stats for Dota2";
+    private static final String REALM_PARAM = "MobileStatsForDota2";
 
     @Inject
     DbAccessor mDbAccessor;
@@ -57,13 +56,9 @@ public class WebViewFragment extends BaseFragment {
     public void onAttach(final Context context) {
         Injector.getComponentStore().getAndroidAwareComponent().inject(this);
         super.onAttach(context);
-    }
-
-    @Override
-    public void onCreate(@Nullable final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         getEventLifecycleListener().enable();
     }
+
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
@@ -105,15 +100,15 @@ public class WebViewFragment extends BaseFragment {
                 return true;
             }
 
+
             @Override
             public void onPageStarted(final WebView view, final String url,
                                       final Bitmap favicon) {
                 final Uri Url = Uri.parse(url);
-
-                if (Url.getAuthority().equals(REALM_PARAM.toLowerCase())) {
+                AppLog.v("Started URL: " + url);
+                if (Url.getAuthority().contains(REALM_PARAM.toLowerCase())) {
                     // That means that authentication is finished and the url contains user's id.
                     mWebView.stopLoading();
-                    mViewFlipper.setDisplayedChild(0);
 
                     // Extracts user id.
                     final Uri userAccountUrl = Uri.parse(Url.getQueryParameter("openid.identity"));
@@ -122,7 +117,7 @@ public class WebViewFragment extends BaseFragment {
 
                     Answers.getInstance().logCustom(new CustomEvent("Successful Steam Login"));
 
-                    getNotificationController().showInfo("Fetching played data");
+                    getNotificationController().showInfo("Fetching player data for id " + userId);
                     mJobScheduler.startFetchPlayersJob(userId, true);
 
                 }
@@ -131,6 +126,8 @@ public class WebViewFragment extends BaseFragment {
             @Override
             public void onPageFinished(final WebView view, final String url) {
                 super.onPageFinished(view, url);
+                AppLog.v("Finished URL: " + url);
+
                 mViewFlipper.setDisplayedChild(1);
             }
         });
@@ -140,7 +137,6 @@ public class WebViewFragment extends BaseFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDataLoadedEvent(final FetchedPlayersEvent event) {
-
 
         if (event.getError() == null && event.getPlayers() != null && !event.getPlayers().isEmpty()) {
             final PlayerSummary playerSummary = event.getPlayers().get(0);
